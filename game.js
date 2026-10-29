@@ -4,7 +4,7 @@
 'use strict';
 const $=s=>document.querySelector(s);
 const cv=$('#game');if(!cv)return;
-const g=cv.getContext('2d'),W=960,H=600;g.scale(2,2);
+const g=cv.getContext('2d'),W=960,H=600;g.scale(1.5,1.5);
 const wrap=$('.gwrap');
 const FH='"Fredoka","Nunito",system-ui,sans-serif',FB='"Nunito",system-ui,sans-serif',INK='#1b1840';
 const LANE_COL=[['#ffe27a','#ffb300'],['#ffb38a','#ff6a3d'],['#a6e6d8','#1fa58f']];
@@ -398,6 +398,6 @@ let last=performance.now(),vis=false;
 new IntersectionObserver(es=>{vis=es[0].isIntersecting;},{threshold:.15}).observe(cv);
 reset();spawnGate();setMode('demo');refreshUI();
 (function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;
-  if(vis){try{if(S.mode==='play'||S.mode==='demo')update(dt);draw();}catch(err){g.setTransform(2,0,0,2,0,0);g.globalAlpha=1;g.shadowBlur=0;console.error(err);}}
+  if(vis){try{if(S.mode==='play'||S.mode==='demo')update(dt);draw();}catch(err){g.setTransform(1.5,0,0,1.5,0,0);g.globalAlpha=1;g.shadowBlur=0;console.error(err);}}
   requestAnimationFrame(loop);})(last);
 })();

@@ -9,9 +9,10 @@
 <meta name="theme-color" content="#00826f">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap"></noscript>
 <script type="importmap">
-{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+{"imports":{"three":"./vendor/three-0.160.0.module.min.js"}}
 </script>
 <style>
 :root{
@@ -64,16 +65,18 @@ header .wrap{height:76px;display:flex;align-items:center;justify-content:space-b
 .checks{list-style:none;display:grid;gap:14px;font-weight:700;font-size:18px}
 .checks li{display:flex;gap:14px;align-items:center}
 .checks li::before{content:"";width:26px;height:26px;border-radius:8px;border:2px solid var(--ink);flex:none;background:var(--yel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1840' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:2px 2px 0 var(--ink)}
-.stage{position:relative;height:370px}
-#bot{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.stage{position:relative;height:450px;margin-right:-120px;margin-top:-30px}
+#bot{position:absolute;left:0;right:0;top:-170px;width:100%;height:calc(100% + 170px);cursor:pointer;touch-action:pan-y}
 .blob{position:absolute;left:50%;transform:translateX(-50%);bottom:-70px;width:300px;aspect-ratio:1.05;background:var(--yel);border:2px solid var(--ink);border-radius:56% 44% 52% 48%/50% 56% 44% 50%;z-index:0}
-.stage canvas{z-index:1}
+.stage canvas{z-index:2}
+.rbfb{position:absolute;left:50%;bottom:8px;height:82%;width:auto;transform:translateX(-50%);z-index:1;transition:opacity .5s}
+.stage.ready .rbfb{opacity:0}
 
 .say{position:relative;z-index:3;max-width:330px;background:#fff;border:2px solid var(--ink);border-radius:18px 18px 4px 18px;padding:12px 16px;font-weight:800;font-size:15px;line-height:1.35;box-shadow:var(--hs);transition:opacity .25s,transform .25s}
 .say::after{content:"";position:absolute;right:-12px;bottom:12px;width:20px;height:20px;background:#fff;border-right:2px solid var(--ink);border-top:2px solid var(--ink);transform:rotate(45deg) skew(12deg,12deg);border-radius:0 6px 0 0}
 .say.sw{opacity:0;transform:translateY(6px)}
 .say small{display:block;font:700 11px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:var(--ind);margin-bottom:3px}
-.sticker{position:absolute;right:-4px;top:210px;z-index:3;background:var(--yel);border:2px solid var(--ink);border-radius:14px;padding:8px 14px;box-shadow:var(--hs);font:600 17px/1.1 var(--hd);transform:rotate(7deg)}
+.sticker{position:absolute;left:30px;bottom:74px;z-index:3;background:var(--yel);border:2px solid var(--ink);border-radius:14px;padding:8px 14px;box-shadow:var(--hs);font:600 17px/1.1 var(--hd);transform:rotate(7deg)}
 .sticker small{display:block;font:800 11px var(--bd);letter-spacing:.06em;text-transform:uppercase}
 
 /* form */
@@ -241,6 +244,59 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 .sticky{display:none}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
 
+
+/* extra sections */
+.band{background:var(--ink);color:#fff;border-block:2px solid var(--ink)}
+.bandgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:26px;padding-bottom:26px}
+.bandgrid div{text-align:center}.bandgrid b{display:block;font:700 42px/1.1 var(--hd);color:var(--yel)}.bandgrid span{font-weight:700;opacity:.85}
+.bgrid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.benefits li{display:flex;gap:16px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:18px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
+.benefits li:hover{transform:translate(-2px,-2px)}
+.benefits i{font-style:normal;flex:none;width:42px;height:42px;border-radius:12px;border:2px solid var(--ink);display:grid;place-items:center;font:700 19px var(--hd);background:var(--yel)}
+.benefits li:nth-child(2) i{background:var(--mint)}.benefits li:nth-child(3) i{background:var(--pink)}.benefits li:nth-child(4) i{background:#cfe9ff}.benefits li:nth-child(5) i{background:#ffe0c2}
+.benefits b{display:block;font:600 19px/1.2 var(--hd);margin-bottom:4px}.benefits span{color:var(--mut);font-weight:600;font-size:15px}
+.ctag{display:inline-block;font:800 11px var(--bd);letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--ink);border-radius:99px;padding:2px 10px;background:var(--lav)}
+.ctarow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.sbento{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.sfig{background:#fff;border:2px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;margin:0}
+.sfig.wide{grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr;align-items:stretch}
+.sfig img{width:100%;height:100%;object-fit:cover;display:block;border-bottom:2px solid var(--ink);aspect-ratio:16/9;background:#dfe6f2}
+.sfig.wide img{border-bottom:0;border-right:2px solid var(--ink);aspect-ratio:auto;min-height:260px}
+.sfig figcaption{padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.sfig .ctag{align-self:flex-start}.sfig b{font:600 24px/1.15 var(--hd)}.sfig small{color:var(--mut);font-weight:600;font-size:15px}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cchip{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:20px;padding:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.cchip:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
+.cchip b{font:600 22px/1.15 var(--hd)}.cchip small{color:var(--mut);font-weight:600;font-size:14.5px}
+.cchip:nth-child(3n+1){background:#fff7d9}.cchip:nth-child(3n+2){background:#e6f7f1}.cchip:nth-child(3n){background:#fde8ef}
+.slist{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:16px 20px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
+.srow:hover{transform:translate(-2px,-2px)}
+.srow b{display:block;font:600 20px/1.2 var(--hd)}.srow small{color:var(--mut);font-weight:600;font-size:13.5px}
+.price{display:flex;gap:8px;align-items:baseline;font:700 22px var(--hd);white-space:nowrap}.price s{font:600 14px var(--bd);color:var(--mut)}
+.price em{font:800 11px var(--bd);font-style:normal;background:var(--org);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:1px 8px;align-self:center}
+.stories{background:#fff6e6;border-block:2px solid var(--ink)}
+.sgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
+.collage{position:relative;height:430px}
+.collage img{position:absolute;width:66%;height:auto;aspect-ratio:3/2;object-fit:cover;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);background:#fff}
+.collage img:nth-of-type(1){left:0;top:24px;transform:rotate(-5deg)}.collage img:nth-of-type(2){right:0;top:150px;transform:rotate(4deg);z-index:2}.collage img:nth-of-type(3){left:8%;bottom:0;transform:rotate(-2deg);z-index:1}
+.rating{position:absolute;right:4%;top:-4px;z-index:4;background:var(--yel);border:3px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);padding:10px 16px;text-align:center;transform:rotate(5deg)}
+.rating b{display:block;font:700 42px/1 var(--hd)}.rating span{font-weight:800;font-size:11px;letter-spacing:.04em}
+.scard{position:relative;background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:8px 8px 0 var(--ink);padding:34px 34px 28px;min-height:330px;overflow:hidden;transition:opacity .3s,transform .3s}
+.scard.out{opacity:0;transform:translateY(10px)}
+.qmark{position:absolute;right:24px;top:-6px;font:700 130px/1 var(--hd);color:var(--yel)}
+.stars{font-size:26px;letter-spacing:3px;margin-bottom:14px;position:relative}
+.star{background:linear-gradient(90deg,#ffb400 var(--f),#dcd9ea var(--f));-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.sq{font:600 22px/1.42 var(--hd);margin-bottom:24px;position:relative}
+.who{display:flex;align-items:center;gap:14px;position:relative}
+.av{width:54px;height:54px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:700 20px var(--hd);flex:none}
+.who b{display:block;font:800 18px var(--bd)}.who small{color:var(--mut);font-weight:700}
+.sdots{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.sdots button{width:46px;height:46px;border-radius:50%;border:2px solid var(--ink);font:700 15px var(--hd);cursor:pointer;opacity:.65;transition:.15s}
+.sdots button.on{opacity:1;box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.sctl{display:flex;gap:10px;margin-top:18px}
+@media (max-width:900px){.bandgrid{grid-template-columns:1fr 1fr}.bgrid,.cgrid{grid-template-columns:1fr 1fr}.sgrid{grid-template-columns:1fr;gap:34px}.sfig.wide{grid-template-columns:1fr}.sfig.wide img{border-right:0;border-bottom:2px solid var(--ink);aspect-ratio:16/9;min-height:0}.slist{grid-template-columns:1fr}.collage{height:340px}.scard{padding:26px 22px 22px}.sq{font-size:19px}}
+@media (max-width:560px){.bgrid,.cgrid,.sbento{grid-template-columns:1fr}.bandgrid b{font-size:32px}.collage{height:290px}.srow{flex-direction:column;align-items:flex-start}}
 @media (max-width:1060px){
   .links{display:none}
   .hero .wrap{grid-template-columns:1fr;gap:10px}
@@ -268,8 +324,8 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 <body>
 <header>
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="TechyGuide home"><img src="logo.png" alt="" width="40" height="53"><span>Techy<b>Guide</b></span></a>
-    <nav class="links" aria-label="Main"><a href="#offer">What you get</a><a href="#how">How it works</a><a href="#play">Play</a><a href="#faq">FAQs</a><a href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Courses</a><a href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop</a></nav>
+    <a class="logo" href="#top" aria-label="TechyGuide home"><img src="logo-sm.png" alt="" width="40" height="53"><span>Techy<b>Guide</b></span></a>
+    <nav class="links" aria-label="Main"><a href="#offer">What you get</a><a href="#schools">Schools</a><a href="#courses">Courses</a><a href="#shop">Shop</a><a href="#stories">Stories</a><a href="#play">Play</a><a href="#faq">FAQs</a></nav>
     <a class="btn org sm" href="#book" data-focus>Book a Free Trial Class</a>
   </div>
 </header>
@@ -282,7 +338,7 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
   <div class="wrap">
     <div class="hl">
       <h4>Learn, play and build!</h4>
-      <h1>Coding &amp; Maths for <span class="u">curious kids</span></h1>
+      <h1>Coding &amp; Robotics for <span class="u">curious kids</span></h1>
       <h2>Live classes, an LMS full of games and self-paced courses – all in one place.</h2>
       <div class="hrow">
         <div class="lc">
@@ -296,7 +352,24 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
         </div>
         <div class="stage" id="stage">
           <div class="blob"></div>
-          <canvas id="bot" aria-label="Techy the robot mascot - click to wave"></canvas>
+          <svg class="rbfb" viewBox="0 0 220 440" aria-hidden="true">
+          <defs><linearGradient id="rn" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2b3453"/><stop offset="1" stop-color="#1b2136"/></linearGradient><linearGradient id="rs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f3f8"/><stop offset="1" stop-color="#d6dae4"/></linearGradient></defs>
+          <ellipse cx="110" cy="430" rx="70" ry="9" fill="rgba(27,24,64,.22)"/>
+          <rect x="62" y="214" width="42" height="104" rx="18" fill="url(#rn)"/><rect x="116" y="214" width="42" height="104" rx="18" fill="url(#rn)"/>
+          <rect x="66" y="312" width="34" height="104" rx="15" fill="url(#rn)"/><rect x="120" y="312" width="34" height="104" rx="15" fill="url(#rn)"/>
+          <circle cx="83" cy="312" r="16" fill="#1d2338"/><circle cx="137" cy="312" r="16" fill="#1d2338"/><circle cx="83" cy="312" r="10" fill="none" stroke="#ff8a1f" stroke-width="4"/><circle cx="137" cy="312" r="10" fill="none" stroke="#ff8a1f" stroke-width="4"/>
+          <rect x="52" y="406" width="54" height="20" rx="10" fill="#1d2338"/><rect x="114" y="406" width="54" height="20" rx="10" fill="#1d2338"/>
+          <rect x="34" y="104" width="30" height="108" rx="14" fill="url(#rn)"/><rect x="156" y="104" width="30" height="108" rx="14" fill="url(#rn)"/>
+          <rect x="30" y="196" width="28" height="92" rx="13" fill="url(#rn)"/><rect x="162" y="196" width="28" height="92" rx="13" fill="url(#rn)"/>
+          <circle cx="42" cy="108" r="19" fill="#1d2338"/><circle cx="178" cy="108" r="19" fill="#1d2338"/><circle cx="42" cy="108" r="11" fill="none" stroke="#ff8a1f" stroke-width="4"/><circle cx="178" cy="108" r="11" fill="none" stroke="#ff8a1f" stroke-width="4"/>
+          <rect x="58" y="196" width="104" height="36" rx="14" fill="url(#rs)"/>
+          <rect x="52" y="96" width="116" height="116" rx="26" fill="url(#rs)"/>
+          <image href="logo-sm.png" x="92" y="130" width="22" height="30"/><rect x="118" y="140" width="38" height="8" rx="4" fill="#1b1840"/><rect x="118" y="152" width="26" height="6" rx="3" fill="#00826f"/>
+          <rect x="96" y="78" width="28" height="22" rx="8" fill="#1d2338"/>
+          <circle cx="110" cy="50" r="42" fill="#1d2338"/><circle cx="68" cy="52" r="9" fill="none" stroke="#ff8a1f" stroke-width="4"/><circle cx="152" cy="52" r="9" fill="none" stroke="#ff8a1f" stroke-width="4"/>
+          <rect x="76" y="36" width="68" height="34" rx="17" fill="#04050c"/><ellipse cx="94" cy="52" rx="7" ry="9" fill="#7fe9ff"/><ellipse cx="126" cy="52" rx="7" ry="9" fill="#7fe9ff"/>
+        </svg>
+        <canvas id="bot" aria-label="Techy the robot mascot - click to wave"></canvas>
           <div class="sticker">Free trial<small>No payment</small></div>
         </div>
       </div>
@@ -349,6 +422,60 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
   </div>
 </div></section>
 
+<div class="band"><div class="wrap bandgrid">
+  <div><b>800+</b><span>schools</span></div><div><b>100K+</b><span>students</span></div><div><b>10</b><span>courses to choose from</span></div><div><b>Free</b><span>shipping across India</span></div>
+</div></div>
+
+<section class="sec" id="why"><div class="wrap">
+  <div class="sh rv"><span class="tg">Why TechyGuide</span><h2>Why learn robotics, coding &amp; AI today?</h2></div>
+  <ul class="benefits bgrid">
+    <li class="rv"><i>1</i><div><b>Build smart machines, not just use them</b><span>Kids assemble and program real robots and see how technology works from the inside.</span></div></li>
+    <li class="rv"><i>2</i><div><b>Learn the technology shaping the future</b><span>AI, IoT and automation made simple &ndash; with projects instead of textbooks.</span></div></li>
+    <li class="rv"><i>3</i><div><b>Create the digital world</b><span>Games, apps and websites: children learn to make things, not only play with them.</span></div></li>
+    <li class="rv"><i>4</i><div><b>A strong foundation in coding</b><span>Python, Scratch and logic skills that carry into school and beyond.</span></div></li>
+    <li class="rv"><i>5</i><div><b>Turn ideas into real applications</b><span>From a first idea to a working project, step by step with mentors.</span></div></li>
+  </ul>
+</div></section>
+
+<section class="sec" id="schools" style="background:var(--mint);border-block:2px solid var(--ink)"><div class="wrap">
+  <div class="sh rv"><span class="tg">For schools &amp; teachers</span><h2>A support ecosystem schools can rely on</h2><p>Hands-on teacher training, kits and live sessions for CBSE, ICSE and STEM tinkering programs.</p></div>
+  <div class="sbento">
+    <figure class="sfig wide rv"><img src="img/school-cbse.webp" alt="Trainers helping teachers set up a 3D printer in a school lab" width="900" height="444" loading="lazy" decoding="async"><figcaption><span class="ctag">CBSE</span><b>Hands-on teacher training</b><small>Teachers learn 3D printing and build skills right in the school lab.</small></figcaption></figure>
+    <figure class="sfig rv"><img src="img/school-icse.webp" alt="A trainer coaching a teacher on a laptop with a robotics kit" width="720" height="355" loading="lazy" decoding="async"><figcaption><span class="ctag">ICSE</span><b>Guided robotics sessions</b><small>Trainers coach teachers step by step with kits and laptops.</small></figcaption></figure>
+    <figure class="sfig rv"><img src="img/school-stem.webp" alt="A live online Python coding session on screen share" width="670" height="364" loading="lazy" decoding="async"><figcaption><span class="ctag">STEM Tinkering</span><b>Live online coding sessions</b><small>Screen-share walkthroughs of real Python projects, from anywhere.</small></figcaption></figure>
+  </div>
+  <div class="ctarow rv"><a class="btn pri" href="#book" data-focus>Book a free demo</a><a class="btn" href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Explore programs</a></div>
+</div></section>
+
+<section class="sec" id="courses"><div class="wrap">
+  <div class="sh rv"><span class="tg">Our courses</span><h2>Pick a path your child will love</h2><p>Robotics, coding, AI and more &ndash; taught live and practised on the LMS.</p></div>
+  <div class="cgrid">
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Robotics</span><b>Robo Champ Course</b><small>Hardware, sensors and core engineering skills while building intelligent robots.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Coding</span><b>Python Programming</b><small>Beginner-friendly Python, widely used in AI and data science.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">AI</span><b>Artificial Intelligence</b><small>Create smart systems that learn and adapt automatically.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Apps</span><b>App Development</b><small>Build user-friendly apps for phones and tablets.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Web</span><b>Web Development</b><small>HTML, CSS and JavaScript to build interactive websites.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Games</span><b>Game Development</b><small>Design and build your very own games.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">IoT</span><b>Internet of Things</b><small>Connect sensors and smart devices together.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Beginner</span><b>Scratch Programming</b><small>Learn coding logic with drag-and-drop blocks.</small></a>
+    <a class="cchip rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><span class="ctag">Electronics</span><b>Electronics</b><small>Understand circuits and build working projects.</small></a>
+  </div>
+  <div class="ctarow rv"><a class="btn yel" href="https://www.techyguide.in/courses" target="_blank" rel="noopener">See all courses</a></div>
+</div></section>
+
+<section class="sec" id="shop" style="background:var(--cream);border-block:2px solid var(--ink)"><div class="wrap">
+  <div class="sh rv"><span class="tg">Techy Shop</span><h2>Build it. Code it. Print it.</h2><p>Robotics kits, electronics and courses delivered to your door &ndash; free shipping across India.</p></div>
+  <div class="slist">
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>TeBoT Champ Kit</b><small>Multi-Servo Smart Automation &amp; Robotics Kit</small></div><div class="price"><em>6% off</em><b>&#8377;7,499</b><s>&#8377;7,999</s></div></a>
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>TechBoT Arduino Kit</b><small>Robotics &amp; sensor kit built on Arduino</small></div><div class="price"><b>&#8377;3,099</b></div></a>
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Otto Spider Kit</b><small>Build and program your own walking robot</small></div><div class="price"><b>&#8377;4,199</b></div></a>
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Robotic Arm Kit</b><small>Hands-on robotic arm for budding engineers</small></div><div class="price"><b>&#8377;4,900</b></div></a>
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Electronics Course</b><small>Kit-based electronics learning at home</small></div><div class="price"><b>&#8377;7,999</b></div></a>
+    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Game Development Course</b><small>Learn to design and code your own games</small></div><div class="price"><b>&#8377;3,999</b></div></a>
+  </div>
+  <div class="ctarow rv"><a class="btn pri" href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop all products</a></div>
+</div></section>
+
 <section class="sec how" id="how"><div class="wrap">
   <div class="sh rv"><span class="tg">Simple &amp; free</span><h2>How the free trial works</h2></div>
   <div class="steps">
@@ -359,6 +486,19 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
   <div style="text-align:center;margin-top:50px"><a class="btn pri" href="#book" data-focus>Book a Free Trial Class</a></div>
 </div></section>
 
+<section class="sec stories" id="stories"><div class="wrap">
+  <div class="sh rv"><span class="tg">Success stories</span><h2>What students say about TechyGuide</h2><p>Real feedback from students after workshops, webinars, robotics kits and the LMS.</p></div>
+  <div class="sgrid">
+    <div class="collage rv"><div class="rating"><b>4.2</b><span>&#9733; AVERAGE &middot; 10 REVIEWS</span></div>
+      <img src="img/school-cbse.webp" alt="Teacher training workshop" width="900" height="444" loading="lazy" decoding="async"><img src="img/school-icse.webp" alt="Guided robotics session" width="720" height="355" loading="lazy" decoding="async"><img src="img/school-stem.webp" alt="Live online coding session" width="670" height="364" loading="lazy" decoding="async"></div>
+    <div class="sright rv">
+      <div class="scard" id="scard" aria-live="polite"></div>
+      <div class="sdots" id="sdots" role="tablist" aria-label="Choose a story"></div>
+      <div class="sctl"><button class="btn sm" id="sprev" aria-label="Previous story">&larr;</button><button class="btn sm" id="snext" aria-label="Next story">&rarr;</button></div>
+    </div>
+  </div>
+</div></section>
+
 <section class="sec gsec" id="play"><div class="wrap">
   <div class="rv"><span class="tg2">Play now</span>
     <h2>Run through the right door!</h2>
@@ -366,7 +506,7 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
     <ul><li><b>1</b>Switch lanes (arrow keys, swipe, or tap left / middle / right)</li><li><b>2</b>Run into the door with the correct answer</li><li><b>3</b>A wrong door costs a heart &ndash; build streaks, every level gets faster</li></ul></div>
   <div class="gcol rv">
     <div class="gwrap" data-mode="demo">
-      <canvas id="game" width="1920" height="1200" aria-label="Math Run game"></canvas>
+      <canvas id="game" width="1440" height="900" aria-label="Math Run game"></canvas>
       <div class="gbtns"><button id="gSound" aria-label="Sound on or off">&#9834;</button></div>
       <div class="ov" id="ovOver"><div class="oc"><span class="newbest" id="newBest">New best score!</span><h3>Great run!</h3>
         <div class="stats"><div><b id="oScore">0</b><span>Score</span></div><div><b id="oBest">0</b><span>Best</span></div><div><b id="oAcc">&ndash;</b><span>Accuracy</span></div><div><b id="oCombo">x0</b><span>Best streak</span></div><div><b id="oLevel">1</b><span>Level</span></div></div>
@@ -399,7 +539,7 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 </div></section>
 </main>
 
-<footer><div class="wrap"><span class="flogo"><i><img src="logo.png" alt="" width="24" height="32"></i>© 2026 TechyGuide</span><nav><a href="https://www.techyguide.in/" target="_blank" rel="noopener">Website</a><a href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Courses</a><a href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop</a></nav></div></footer>
+<footer><div class="wrap"><span class="flogo"><i><img src="logo-sm.png" alt="" width="24" height="32"></i>© 2026 TechyGuide</span><nav><a href="https://www.techyguide.in/" target="_blank" rel="noopener">Website</a><a href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Courses</a><a href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop</a></nav></div></footer>
 <div class="sticky"><a class="btn org" href="#book" data-focus>Book a Free Trial Class</a></div>
 
 <script>
@@ -466,7 +606,61 @@ $('#lead').addEventListener('submit',async e=>{
 </script>
 
 <!-- Techy the robot -->
-<script type="module" src="robot.js"></script>
-<script src="game.js" defer></script>
+<script>
+/* testimonials (real student feedback from techyguide.in) + course carousel */
+(function(){
+  var $=function(s){return document.querySelector(s);};
+  var T=[
+   {n:'Aarav Sharma',c:'Mumbai',r:4.5,q:'The workshop conducted in our school was very interesting. We learned about coding and robotics in a simple way. The projects were fun to build and helped me understand technology better.'},
+   {n:'Royston Wilson',c:'Mumbai',r:5,q:'I really enjoyed learning robotics with TechyGuide. The kits are easy to use and helped me understand how robots work. I also like the LMS platform where I can watch lessons and learn new things anytime.'},
+   {n:'Shruthi Prakash',c:'Bangalore',r:4,q:'TechyGuide classes helped me learn about AI and IoT for the first time. The activities and projects are very exciting. I also use the LMS to practice and learn more after the sessions.'},
+   {n:'Raghavendra Kamath',c:'Bangalore',r:3.5,q:'The robotics kit is very easy to assemble and the instructions are clear. I built my own small robot and it was a great experience. Thank you TechyGuide for making learning so fun.'},
+   {n:'Debajyoti Majumder',c:'Kolkata',r:4.5,q:'I attended a TechyGuide webinar and learned many new things about technology and innovation. The trainer explained everything clearly and the session was very engaging.'},
+   {n:'Vivaan Gupta',c:'Lucknow',r:5,q:'Through TechyGuide courses, I learned coding, robotics, and basic electronics. The LMS videos and activities help me understand the concepts step by step. It makes learning technology very interesting.'},
+   {n:'Kabir Singh',c:'Agra',r:3.5,q:'The workshop in our school was amazing. We built small projects and learned how sensors and motors work. It increased my interest in robotics and engineering.'},
+   {n:'Yash Khanna',c:'Karnataka',r:3,q:'I attended a TechyGuide webinar and learned many new things about technology and innovation. The trainer explained everything clearly and the session was very engaging.'},
+   {n:'Riya',c:'Pune',r:4.5,q:'The hands-on activities during the workshop were my favorite part. We learned by building real projects instead of just reading from books. It was a wonderful experience.'},
+   {n:'Adhvik Rao',c:'Karnataka',r:4,q:'TechyGuide courses helped me learn many new technologies like AI, coding, and robotics. The projects are fun and the LMS helps me practice more at home. Thank you TechyGuide for this opportunity.'}];
+  var COL=['#ffe680','#c8f7d8','#ffd6e3','#cfe9ff','#ffe0c2','#d6f0e9'];
+  var card=$('#scard'),dots=$('#sdots'),cur=0,timer=null,paused=false;
+  if(card){
+    var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+    var ini=function(n){var p=n.split(' ');return (p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();};
+    var stars=function(r){var o='';for(var i=0;i<5;i++){var f=r>=i+1?100:r>=i+.5?50:0;o+='<span class="star" style="--f:'+f+'%">&#9733;</span>';}return o;};
+    dots.innerHTML=T.map(function(t,i){return '<button type="button" role="tab" aria-label="'+esc(t.n)+'" style="background:'+COL[i%COL.length]+'" data-i="'+i+'">'+ini(t.n)+'</button>';}).join('');
+    var show=function(i,instant){
+      cur=(i+T.length)%T.length;
+      var go=function(){var t=T[cur];
+        card.innerHTML='<span class="qmark" aria-hidden="true">&ldquo;</span><div class="stars" aria-label="'+t.r+' out of 5 stars">'+stars(t.r)+'</div><p class="sq">'+esc(t.q)+'</p><div class="who"><span class="av" style="background:'+COL[cur%COL.length]+'">'+ini(t.n)+'</span><div><b>'+esc(t.n)+'</b><small>'+esc(t.c)+' &middot; '+t.r+'/5</small></div></div>';
+        [].forEach.call(dots.children,function(b,k){b.classList.toggle('on',k===cur);b.setAttribute('aria-selected',k===cur);});
+        card.classList.remove('out');};
+      if(instant){go();return;}
+      card.classList.add('out');setTimeout(go,260);
+    };
+    dots.addEventListener('click',function(e){var b=e.target.closest('button');if(b){show(+b.dataset.i);restart();}});
+    $('#sprev').onclick=function(){show(cur-1);restart();};$('#snext').onclick=function(){show(cur+1);restart();};
+    var restart=function(){clearInterval(timer);timer=setInterval(function(){if(!paused&&!document.hidden)show(cur+1);},7000);};
+    card.addEventListener('mouseenter',function(){paused=true;});card.addEventListener('mouseleave',function(){paused=false;});
+    show(0,true);restart();
+  }
+})();
+</script>
+<script>
+/* load the heavy parts only when needed: robot after the page is interactive, game when it nears the viewport */
+(function(){
+  var st=document.getElementById('stage'),nav=navigator,conn=nav.connection||{};
+  var low=conn.saveData||(nav.deviceMemory&&nav.deviceMemory<=2)||(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function load(src,mod){var s=document.createElement('script');if(mod)s.type='module';s.src=src;document.head.appendChild(s);}
+  if(!low){
+    var go=function(){load('robot.js',true);};
+    addEventListener('load',function(){('requestIdleCallback' in window)?requestIdleCallback(go,{timeout:1500}):setTimeout(go,600);});
+    addEventListener('robot-ready',function(){st&&st.classList.add('ready');});
+  }
+  var gc=document.getElementById('game');
+  if(gc&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load('game.js');}},{rootMargin:'700px'});io.observe(gc);
+  }else load('game.js');
+})();
+</script>
 </body>
 </html>
