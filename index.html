@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book a Free Trial Class | TechyGuide</title>
+<meta name="description" content="Live classes, an LMS full of games and self-paced courses for kids. Book your child's free trial class at TechyGuide.">
+<link rel="icon" type="image/png" href="logo-original.png">
+<meta name="theme-color" content="#00826f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+<style>
+:root{
+  --ink:#01000a;--mut:#5a5780;--ind:#00826f;--ind2:#00685a;--org:#e28717;--yel:#ffcf3f;--sky:#d6f1ec;--mint:#c9f3de;--pink:#ffd6e3;--lav:#d6f0e9;--cream:#fff6e6;
+  --hd:'Fredoka',system-ui,sans-serif;--bd:'Nunito',system-ui,sans-serif;
+  --hs:4px 4px 0 var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{font:400 17px/1.55 var(--bd);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+h1,h2,h3,h4{font-family:var(--hd);font-weight:600;line-height:1.08;letter-spacing:-.01em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px;position:relative}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;border-radius:14px;border:2px solid var(--ink);background:#fff;font:700 16px var(--bd);cursor:pointer;box-shadow:var(--hs);transition:transform .12s,box-shadow .12s;white-space:nowrap}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.pri{background:var(--ind);color:#fff}
+.btn.org{background:var(--org)}
+.btn.yel{background:var(--yel)}
+.btn.sm{height:44px;padding:0 20px;font-size:15px;box-shadow:3px 3px 0 var(--ink)}
+
+/* header */
+header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:2px solid var(--ink)}
+header .wrap{height:76px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font:700 29px var(--hd);letter-spacing:-.025em;line-height:1}
+.logo img{width:40px;height:53px;object-fit:contain;display:block;filter:drop-shadow(0 2px 0 rgba(27,24,64,.12))}
+.logo b{color:var(--ind)}
+.links{display:flex;gap:34px;font-weight:700}
+.links a{position:relative}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:3px;background:var(--org);transform:scaleX(0);transform-origin:left;transition:transform .2s;border-radius:3px}
+.links a:hover::after{transform:scaleX(1)}
+
+/* hero */
+.hero{position:relative;background:var(--sky);border-bottom:2px solid var(--ink);overflow:hidden;padding:44px 0 0}
+.hero .deco{position:absolute;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1fr 450px;gap:56px;align-items:start;z-index:1}
+.hl{grid-column:1;grid-row:1}
+.card{grid-column:2;grid-row:1;align-self:start}
+.hrow{display:grid;grid-template-columns:360px 1fr;align-items:end;gap:6px;margin-top:-84px}
+.lc{padding-bottom:40px;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.hl h4{font-size:26px;color:var(--ind);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.hl h4::before{content:"";width:34px;height:4px;border-radius:4px;background:var(--org)}
+.hl h1{font-size:clamp(40px,4.9vw,68px);font-weight:700;line-height:1.02}
+.u{position:relative;white-space:nowrap}
+.u::after{content:"";position:absolute;left:-2%;right:-2%;bottom:-.14em;height:.3em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M2 8C20 2 34 2 50 7s30 5 48 0 32-5 50 0 34 4 50-1' fill='none' stroke='%23e28717' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.hl h2{font:600 clamp(19px,1.9vw,24px)/1.3 var(--hd);margin:20px 0 26px;max-width:500px}
+.checks{list-style:none;display:grid;gap:14px;font-weight:700;font-size:18px}
+.checks li{display:flex;gap:14px;align-items:center}
+.checks li::before{content:"";width:26px;height:26px;border-radius:8px;border:2px solid var(--ink);flex:none;background:var(--yel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1840' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:2px 2px 0 var(--ink)}
+.stage{position:relative;height:370px}
+#bot{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.blob{position:absolute;left:50%;transform:translateX(-50%);bottom:-70px;width:300px;aspect-ratio:1.05;background:var(--yel);border:2px solid var(--ink);border-radius:56% 44% 52% 48%/50% 56% 44% 50%;z-index:0}
+.stage canvas{z-index:1}
+
+.say{position:relative;z-index:3;max-width:330px;background:#fff;border:2px solid var(--ink);border-radius:18px 18px 4px 18px;padding:12px 16px;font-weight:800;font-size:15px;line-height:1.35;box-shadow:var(--hs);transition:opacity .25s,transform .25s}
+.say::after{content:"";position:absolute;right:-12px;bottom:12px;width:20px;height:20px;background:#fff;border-right:2px solid var(--ink);border-top:2px solid var(--ink);transform:rotate(45deg) skew(12deg,12deg);border-radius:0 6px 0 0}
+.say.sw{opacity:0;transform:translateY(6px)}
+.say small{display:block;font:700 11px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:var(--ind);margin-bottom:3px}
+.sticker{position:absolute;right:-4px;top:210px;z-index:3;background:var(--yel);border:2px solid var(--ink);border-radius:14px;padding:8px 14px;box-shadow:var(--hs);font:600 17px/1.1 var(--hd);transform:rotate(7deg)}
+.sticker small{display:block;font:800 11px var(--bd);letter-spacing:.06em;text-transform:uppercase}
+
+/* form */
+.card{position:relative;z-index:4;background:#fff;border:2px solid var(--ink);border-radius:22px;box-shadow:8px 8px 0 var(--ink);padding:30px 30px 24px;margin-bottom:44px}
+.card h3{font-size:27px;margin-bottom:16px}
+.prog{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.prog i{height:10px;border-radius:8px;border:2px solid var(--ink);background:#fff;transition:background .3s}
+.prog i.on{background:var(--org)}
+.stp{font:800 12px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:20px}
+.step{display:none}.step.on{display:block;animation:fi .35s ease}
+@keyframes fi{from{opacity:0;transform:translateX(14px)}}
+.f{margin-bottom:16px}
+.f>label,.lab{display:block;font-weight:800;font-size:14.5px;margin-bottom:6px}
+.f input[type=text],.f input[type=tel],.f input[type=email],.f select,.ph input,.ph select{width:100%;height:52px;padding:0 16px;border:2px solid var(--ink);border-radius:12px;background:#fff;outline:none;font-size:16px;font-weight:600;transition:box-shadow .15s,transform .15s}
+.f select,.ph select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%231b1840' stroke-width='2.4'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center}
+.f input::placeholder{color:#9b98b8;font-weight:500}
+.f input:focus,.f select:focus,.ph input:focus,.ph select:focus{box-shadow:4px 4px 0 var(--org);transform:translate(-2px,-2px)}
+.f small{display:block;color:var(--mut);font-size:13px;margin-top:6px}
+.f .em{display:none;color:#d4204c;font-size:13.5px;font-weight:800;margin-top:6px}
+.f.err input,.f.err select{border-color:#d4204c;background-color:#fff4f6}.f.err .em{display:block}
+.ph{display:grid;grid-template-columns:100px 1fr;gap:10px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:flex;align-items:center;justify-content:center;height:48px;border:2px solid var(--ink);border-radius:12px;font-weight:800;background:#fff;transition:.15s}
+.seg input:checked+span{background:var(--yel);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.seg input:focus-visible+span{outline:3px solid var(--ind);outline-offset:2px}
+.warn{display:none;background:var(--cream);border:2px dashed var(--org);border-radius:12px;padding:10px 14px;font-size:13.5px;font-weight:700;margin-top:10px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:14px;font-weight:600;line-height:1.45;cursor:pointer}
+.chk input{width:22px;height:22px;accent-color:var(--ind);flex:none;margin-top:1px}
+.cta{width:100%;height:56px;margin-top:6px;border:2px solid var(--ink);border-radius:14px;background:var(--ind);color:#fff;font:700 17px var(--bd);cursor:pointer;box-shadow:var(--hs);display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .12s,box-shadow .12s}
+.cta:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.cta:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.cta:disabled{opacity:.65;cursor:wait;transform:none}
+.cta svg{width:20px;height:20px}
+.back{display:block;margin:12px auto 0;background:none;border:0;color:var(--mut);font-weight:800;font-size:14px;cursor:pointer}
+.back:hover{color:var(--ink)}
+.fmsg{min-height:20px;margin-top:8px;color:#d4204c;font-weight:800;font-size:14px;text-align:center}
+.note{text-align:center;font-size:12.5px;color:var(--mut);margin-top:10px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.ok{display:none;text-align:center;padding:20px 0 6px}
+.ok .tick{width:84px;height:84px;margin:0 auto 18px;border-radius:50%;background:var(--mint);border:2px solid var(--ink);box-shadow:var(--hs);display:grid;place-items:center;animation:pop .55s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(0)}}
+.ok h3{font-size:30px}.ok p{color:var(--mut);margin:10px 0 22px}
+.card.done .prog,.card.done .stp,.card.done form,.card.done>h3{display:none}.card.done .ok{display:block}
+.cf{position:fixed;top:-20px;width:10px;height:14px;z-index:99;pointer-events:none;border:1.5px solid var(--ink);animation:cf 2.4s ease-in forwards}
+@keyframes cf{to{transform:translate(var(--x),105vh) rotate(720deg)}}
+
+/* offerings */
+.sec{padding:100px 0}
+.sh{text-align:center;max-width:700px;margin:0 auto 54px}
+.sh h2{font-size:clamp(34px,4.2vw,56px)}
+.sh p{color:var(--mut);margin-top:14px;font-size:19px}
+.sh .tg{display:inline-block;background:var(--lav);border:2px solid var(--ink);border-radius:99px;padding:4px 16px;font:800 12.5px var(--bd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.off{display:flex;flex-direction:column;border:2px solid var(--ink);border-radius:22px;padding:28px;box-shadow:6px 6px 0 var(--ink);min-height:300px;transition:transform .15s,box-shadow .15s}
+.off:hover{transform:translate(-3px,-3px) rotate(-.6deg);box-shadow:9px 9px 0 var(--ink)}
+.off .ic{width:62px;height:62px;border-radius:18px;background:#fff;border:2px solid var(--ink);display:grid;place-items:center;margin-bottom:20px}
+.off .ic svg{width:34px;height:34px}
+.off h3{font-size:25px;margin-bottom:8px}.off p{font-weight:600;color:rgba(27,24,64,.75)}
+.off .ar{margin-top:auto;padding-top:18px;font-weight:800}
+.o1{background:var(--pink)}.o2{background:var(--mint)}.o3{background:var(--lav)}.o4{background:var(--cream)}
+
+/* steps */
+.how{background:var(--cream);border-block:2px solid var(--ink)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;position:relative}
+.steps::before{content:"";position:absolute;left:12%;right:12%;top:38px;border-top:3px dashed var(--ink);opacity:.35}
+.st{text-align:center;position:relative}
+.st .n{width:78px;height:78px;margin:0 auto 20px;border-radius:50%;border:2px solid var(--ink);box-shadow:var(--hs);display:grid;place-items:center;font:700 34px var(--hd);background:var(--yel)}
+.st:nth-child(2) .n{background:var(--org)}.st:nth-child(3) .n{background:#7fd6c6}
+.st h3{font-size:25px;margin-bottom:8px}.st p{color:var(--mut);max-width:300px;margin:0 auto}
+
+/* game */
+.gsec{background:var(--lav);border-bottom:2px solid var(--ink)}
+.gsec .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:56px;align-items:center}
+.gsec h2{font-size:clamp(34px,4.2vw,56px)}
+.gsec p{color:var(--mut);margin:16px 0 20px;font-size:19px}
+.gsec ul{list-style:none;display:grid;gap:12px;font-weight:700}
+.gsec li{display:flex;gap:12px;align-items:center}
+.gsec li b{width:32px;height:32px;border-radius:10px;border:2px solid var(--ink);background:var(--yel);display:grid;place-items:center;flex:none;font-size:14px}
+.gwrap{position:relative;border:2px solid var(--ink);border-radius:22px;overflow:hidden;background:#bfe9ff;aspect-ratio:8/5;box-shadow:8px 8px 0 var(--ink)}
+.gsec .tg2{display:inline-block;background:#fff;border:2px solid var(--ink);border-radius:99px;padding:4px 16px;font:800 12.5px var(--bd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+#game{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.gbtns{position:absolute;right:12px;bottom:12px;display:flex;gap:8px;z-index:3}
+.gbtns button{width:40px;height:40px;border-radius:12px;border:2px solid var(--ink);background:#fff;font:800 14px var(--bd);cursor:pointer;box-shadow:2px 2px 0 var(--ink);transition:transform .1s}
+.gbtns button:hover{transform:translate(-1px,-1px)}
+.gbtns button.off{background:#ffd6e3;text-decoration:line-through}
+.ov{position:absolute;inset:0;z-index:4;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(20,14,64,.9);color:#fff;text-align:center;padding:18px;overflow:auto}
+.ov.on{display:flex}
+.ov h3{font-size:clamp(28px,4.2vw,54px);line-height:1}
+.ov p{margin:0;font-size:16px;color:rgba(255,255,255,.85);max-width:420px}
+.ov .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.ov small{color:rgba(255,255,255,.65);font-weight:700}
+.opt{display:flex;flex-direction:column;gap:8px;align-items:center}
+.opt>span{font:800 12px var(--bd);letter-spacing:.1em;text-transform:uppercase;color:#ffd23f}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chips button{padding:8px 16px;border-radius:99px;border:2px solid #fff;background:transparent;color:#fff;font:800 14px var(--bd);cursor:pointer;transition:.15s}
+.chips button:hover{background:rgba(255,255,255,.14)}
+.chips button.on{background:#ffd23f;border-color:#ffd23f;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;width:100%;max-width:520px}
+.stats div{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:14px;padding:8px 4px}
+.stats b{display:block;font:600 24px var(--hd);color:#ffd23f;line-height:1.1}
+.stats span{font:800 10px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.newbest{display:none;background:#ffd23f;color:var(--ink);border-radius:99px;padding:4px 14px;font:800 12px var(--bd);letter-spacing:.08em;text-transform:uppercase;transform:rotate(-3deg)}
+#missList{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;font-size:14px}
+#missList b{color:#ffd23f;font-weight:800}
+#missList span{background:rgba(255,255,255,.12);border-radius:10px;padding:3px 10px;font-weight:800}
+.gcol{min-width:0}
+.gwrap[data-mode=demo] #game{cursor:pointer}
+.gset{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:flex-end;margin-top:24px}
+.gset .grp{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.gset .grp>span{font:800 12px var(--bd);letter-spacing:.1em;text-transform:uppercase;color:var(--ind)}
+.gset .chips{justify-content:flex-start}
+.gset .chips button{border-color:var(--ink);color:var(--ink);background:#fff;padding:6px 14px;box-shadow:2px 2px 0 var(--ink)}
+.gset .chips button:hover{background:var(--cream)}
+.gset .chips button.on{background:var(--yel);border-color:var(--ink)}
+.gset small{color:var(--mut);font-weight:800}
+@media (max-width:640px){
+  .gset{gap:10px 14px}.gset .chips button{padding:5px 10px;font-size:12px}
+  .ov{gap:8px;padding:10px}.ov h3{font-size:24px}.ov p,.opt>span,#missList,.newbest{display:none}
+  .chips button{padding:5px 11px;font-size:12px}
+  .stats{gap:4px}.stats b{font-size:17px}.stats span{font-size:8px}
+  .ov .btn{height:38px;padding:0 14px;font-size:13px}
+  .gbtns button{width:32px;height:32px}
+}
+
+/* game ui polish */
+.gwrap{border-radius:26px;box-shadow:10px 10px 0 var(--ink)}
+.gbtns button{border-radius:14px;width:42px;height:42px;font-size:16px;background:#fff}
+.ov{background:rgba(27,24,64,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.oc{background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);padding:24px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;width:min(100%,600px);animation:ocin .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes ocin{from{transform:scale(.8) translateY(20px);opacity:0}}
+.oc h3{font-size:clamp(30px,4vw,46px);color:var(--ink)}
+.oc .stats{max-width:none}
+.oc .stats div{border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:10px 4px;background:#fff}
+.oc .stats div:nth-child(1){background:#ffe680}.oc .stats div:nth-child(2){background:#c8f7d8}.oc .stats div:nth-child(3){background:#ffd6e3}.oc .stats div:nth-child(4){background:#ffe0c2}.oc .stats div:nth-child(5){background:#d6f0e9}
+.oc .stats b{color:var(--ink);font-size:26px}
+.oc .stats span{color:rgba(27,24,64,.7)}
+.oc #missList{color:var(--ink)}.oc #missList b{color:#1fa58f}
+.oc #missList span{background:var(--cream);border:2px solid var(--ink);border-radius:10px}
+.oc .newbest{border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.gset{background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);padding:16px 20px;margin-top:26px;gap:14px 28px}
+.gset .chips{gap:0;border:2px solid var(--ink);border-radius:99px;overflow:hidden;background:#fff}
+.gset .chips button{border:0;border-radius:0;box-shadow:none;padding:8px 16px;border-right:2px solid var(--ink);background:#fff}
+.gset .chips button:last-child{border-right:0}
+.gset .chips button.on{background:var(--yel)}
+.gset .chips button:hover:not(.on){background:var(--cream)}
+@media (max-width:640px){.oc{padding:12px 14px;gap:8px;border-radius:18px}.oc h3{font-size:22px}.oc .stats b{font-size:16px}.gset{padding:12px}.gset .chips button{padding:6px 10px}}
+/* faq */
+.faq{max-width:840px;margin:0 auto;display:grid;gap:16px}
+details{border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:4px 4px 0 var(--ink);padding:20px 24px;transition:background .2s}
+details[open]{background:var(--cream)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;font:600 20px var(--hd)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";width:32px;height:32px;border-radius:50%;border:2px solid var(--ink);background:var(--yel);display:grid;place-items:center;font:700 22px/1 var(--bd);flex:none}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--mut);font-weight:600}
+.final{background:var(--ind);color:#fff;border-block:2px solid var(--ink);padding:80px 0;text-align:center;position:relative;overflow:hidden}
+.final h2{font-size:clamp(32px,4.4vw,58px)}
+.final p{margin:14px 0 30px;font-size:19px;opacity:.9}
+footer{background:var(--ink);color:#d7d4f2;padding:34px 0;font-weight:600;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.flogo{display:flex;align-items:center;gap:12px}.flogo i{width:42px;height:42px;border-radius:12px;background:#fff;display:grid;place-items:center}.flogo img{width:24px;height:32px;object-fit:contain}
+footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
+.sticky{display:none}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+
+@media (max-width:1060px){
+  .links{display:none}
+  .hero .wrap{grid-template-columns:1fr;gap:10px}
+  .hl,.card{grid-column:auto;grid-row:auto}
+  .hl{display:contents}.hl>*{order:0}.card{order:1;margin-bottom:30px}.hrow{order:2;grid-template-columns:1fr;margin-top:0}.lc{padding-bottom:0}
+  .say::after{display:none}
+  .grid4{grid-template-columns:1fr 1fr}
+  .gsec .wrap{grid-template-columns:1fr}
+  .sticky{display:block;position:fixed;left:14px;right:14px;bottom:14px;z-index:55}
+  .sticky .btn{width:100%}
+}
+@media (max-width:640px){
+  .wrap{padding:0 18px}
+  header .wrap{height:66px}.logo{font-size:22px}.logo img{width:32px;height:42px}
+  .hero{padding-top:36px}
+  .card{padding:24px 20px 20px;box-shadow:6px 6px 0 var(--ink)}
+  .grid4,.steps{grid-template-columns:1fr}.steps::before{display:none}
+  .sec{padding:70px 0}
+  .stage{height:340px}.say{font-size:14px}
+  .ph{grid-template-columns:92px 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="TechyGuide home"><img src="logo.png" alt="" width="40" height="53"><span>Techy<b>Guide</b></span></a>
+    <nav class="links" aria-label="Main"><a href="#offer">What you get</a><a href="#how">How it works</a><a href="#play">Play</a><a href="#faq">FAQs</a><a href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Courses</a><a href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop</a></nav>
+    <a class="btn org sm" href="#book" data-focus>Book a Free Trial Class</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="book">
+  <svg class="deco" style="left:3%;top:34px;width:56px" viewBox="0 0 40 40" fill="none" stroke="#1b1840" stroke-width="3" stroke-linecap="round"><path d="M20 4v32M4 20h32"/></svg>
+  <svg class="deco" style="left:46%;top:70px;width:60px" viewBox="0 0 60 20" fill="none" stroke="#e28717" stroke-width="4" stroke-linecap="round"><path d="M3 12c8-10 14 8 22-2s14 8 22-2 8 4 10 2"/></svg>
+  <svg class="deco" style="right:44%;bottom:34%;width:30px" viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.6 5.7 21.3l1.7-7.1L2 9.5l7.1-.6z" fill="#ffcf3f" stroke="#1b1840" stroke-width="1.8" stroke-linejoin="round"/></svg>
+  <div class="wrap">
+    <div class="hl">
+      <h4>Learn, play and build!</h4>
+      <h1>Coding &amp; Maths for <span class="u">curious kids</span></h1>
+      <h2>Live classes, an LMS full of games and self-paced courses – all in one place.</h2>
+      <div class="hrow">
+        <div class="lc">
+          <div class="say" id="say"><small>Techy says</small><span id="saytxt">Hi, I'm Techy! Let's book your free class.</span></div>
+          <ul class="checks">
+            <li>Live classes with friendly mentors</li>
+            <li>Fun practice games on the LMS</li>
+            <li>Self-paced courses, any time</li>
+            <li>Projects and progress to follow</li>
+          </ul>
+        </div>
+        <div class="stage" id="stage">
+          <div class="blob"></div>
+          <canvas id="bot" aria-label="Techy the robot mascot - click to wave"></canvas>
+          <div class="sticker">Free trial<small>No payment</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card">
+      <h3>Claim your free trial class</h3>
+      <div class="prog" id="prog"><i class="on"></i><i></i><i></i></div>
+      <div class="stp" id="stp">Step 1 of 3 · Contact details</div>
+      <form id="lead" novalidate>
+        <div class="step on" data-s="1">
+          <div class="f" id="f-phone"><span class="lab">Mobile number</span>
+            <div class="ph"><select id="cc" aria-label="Country code"><option value="+91">+91</option><option value="+1">+1</option><option value="+44">+44</option><option value="+971">+971</option><option value="+65">+65</option><option value="+61">+61</option></select>
+            <input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Enter mobile number" maxlength="14"></div>
+            <small>Please share the number you use for WhatsApp</small><span class="em">Enter a valid mobile number</span></div>
+          <div class="f" id="f-email"><label for="email">Parent's email</label><input id="email" type="email" autocomplete="email" placeholder="Enter email ID"><span class="em">Enter a valid email</span></div>
+          <button class="cta" type="button" data-next>Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="step" data-s="2">
+          <div class="f" id="f-child"><label for="child">Child's name</label><input id="child" type="text" autocomplete="off" placeholder="Enter child's name" maxlength="80"><small>This will be used on your child's certificate</small><span class="em">Enter the child's name</span></div>
+          <div class="f" id="f-grade"><label for="grade">Child's grade</label><select id="grade"><option value="">Select grade</option></select><span class="em">Select a grade</span></div>
+          <div class="f"><span class="lab">Do you have a laptop or desktop?</span><div class="seg"><label><input type="radio" name="lap" value="yes" checked><span>Yes</span></label><label><input type="radio" name="lap" value="no"><span>No</span></label></div>
+            <div class="warn" id="lapwarn">A laptop or desktop is needed for live classes – we'll help with options when we call.</div></div>
+          <button class="cta" type="button" data-next>Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="back" type="button" data-back>← Back</button>
+        </div>
+        <div class="step" data-s="3">
+          <div class="f" id="f-course"><label for="course">What should we start with?</label><select id="course"><option value="">Select a course</option><option>Coding</option><option>Maths</option><option>AI &amp; Robotics</option><option>Game Development</option><option>Not sure yet</option></select><span class="em">Select a course</span></div>
+          <div class="f" id="f-slot"><label for="slot">Preferred time</label><select id="slot"><option value="">Select a slot</option><option>Weekday evening</option><option>Weekend morning</option><option>Weekend evening</option></select><span class="em">Select a time slot</span></div>
+          <div class="f" id="f-consent"><label class="chk"><input type="checkbox" id="consent"><span>I'm the parent / guardian and agree to be contacted by TechyGuide about this trial class.</span></label><span class="em">Consent is required</span></div>
+          <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="cta" type="submit" id="sbtn">Book a Free Trial Class</button>
+          <button class="back" type="button" data-back>← Back</button>
+        </div>
+        <div class="fmsg" id="fmsg" role="alert"></div>
+        <p class="note">All fields are required. Your details are only used to arrange your trial class.</p>
+      </form>
+      <div class="ok"><div class="tick"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#1b1840" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><h3>You're booked in, <span id="okname"></span>!</h3><p>Our team will contact you on WhatsApp / phone shortly to confirm the class time.</p><a class="btn yel" href="#play">Play Math Jet while you wait</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="offer"><div class="wrap">
+  <div class="sh rv"><span class="tg">All in one place</span><h2>Everything your child needs to grow</h2><p>One TechyGuide account brings live teaching, games and courses together.</p></div>
+  <div class="grid4">
+    <div class="off o1 rv"><div class="ic"><svg viewBox="0 0 34 34" fill="none" stroke="#1b1840" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="7" width="20" height="20" rx="4"/><path d="M23 15l8-5v14l-8-5z"/></svg></div><h3>Live classes</h3><p>Interactive sessions where mentors teach, answer questions and cheer your child on.</p><span class="ar">Book a free class →</span></div>
+    <div class="off o2 rv"><div class="ic"><svg viewBox="0 0 34 34" fill="none" stroke="#1b1840" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="9" width="28" height="17" rx="8"/><path d="M11 14v7M7.5 17.5h7"/><circle cx="23" cy="16" r="1.4" fill="#1b1840"/><circle cx="26.5" cy="19.5" r="1.4" fill="#1b1840"/></svg></div><h3>LMS with games</h3><p>Practise through games, earn progress and see how far your child has come.</p><span class="ar">Try Math Jet below →</span></div>
+    <a class="off o3 rv" href="https://www.techyguide.in/courses" target="_blank" rel="noopener"><div class="ic"><svg viewBox="0 0 34 34" fill="none" stroke="#1b1840" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M5 6h10a3 3 0 0 1 3 3v19a3 3 0 0 0-3-3H5zM29 6H19a3 3 0 0 0-1 .2V28a3 3 0 0 1 1-.2h10z"/></svg></div><h3>Courses</h3><p>Self-paced lessons in coding, maths and more – learn any time, at any speed.</p><span class="ar">See all courses →</span></a>
+    <a class="off o4 rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div class="ic"><svg viewBox="0 0 34 34" fill="none" stroke="#1b1840" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M6 11h22l-2 17H8zM12 11V9a5 5 0 0 1 10 0v2"/></svg></div><h3>Techy Shop</h3><p>Tools and learning kits for hands-on building at home.</p><span class="ar">Visit the shop →</span></a>
+  </div>
+</div></section>
+
+<section class="sec how" id="how"><div class="wrap">
+  <div class="sh rv"><span class="tg">Simple &amp; free</span><h2>How the free trial works</h2></div>
+  <div class="steps">
+    <div class="st rv"><div class="n">1</div><h3>Book your slot</h3><p>Fill the short form and pick a time that suits your family.</p></div>
+    <div class="st rv"><div class="n">2</div><h3>Join a live class</h3><p>Your child meets a TechyGuide mentor and tries fun activities.</p></div>
+    <div class="st rv"><div class="n">3</div><h3>Pick a learning path</h3><p>We recommend courses and LMS games that fit your child.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:50px"><a class="btn pri" href="#book" data-focus>Book a Free Trial Class</a></div>
+</div></section>
+
+<section class="sec gsec" id="play"><div class="wrap">
+  <div class="rv"><span class="tg2">Play now</span>
+    <h2>Run through the right door!</h2>
+    <p>Math Run is a quick taste of the games inside our LMS. Techy runs by itself until you jump in &ndash; tap the game to start!</p>
+    <ul><li><b>1</b>Switch lanes (arrow keys, swipe, or tap left / middle / right)</li><li><b>2</b>Run into the door with the correct answer</li><li><b>3</b>A wrong door costs a heart &ndash; build streaks, every level gets faster</li></ul></div>
+  <div class="gcol rv">
+    <div class="gwrap" data-mode="demo">
+      <canvas id="game" width="1920" height="1200" aria-label="Math Run game"></canvas>
+      <div class="gbtns"><button id="gSound" aria-label="Sound on or off">&#9834;</button></div>
+      <div class="ov" id="ovOver"><div class="oc"><span class="newbest" id="newBest">New best score!</span><h3>Great run!</h3>
+        <div class="stats"><div><b id="oScore">0</b><span>Score</span></div><div><b id="oBest">0</b><span>Best</span></div><div><b id="oAcc">&ndash;</b><span>Accuracy</span></div><div><b id="oCombo">x0</b><span>Best streak</span></div><div><b id="oLevel">1</b><span>Level</span></div></div>
+        <div id="missList"></div>
+        <div class="row"><button class="btn yel" id="gAgain">Play again</button><button class="btn" id="gMenu">Watch demo</button><a class="btn org" href="#book" data-focus>Book free trial</a></div>
+</div>      </div>
+    </div>
+    <div class="gset">
+      <div class="grp"><span>Topic</span><div class="chips" id="topics"><button data-v="mix">Mixed</button><button data-v="addsub">Add &amp; Subtract</button><button data-v="times">Times tables</button><button data-v="div">Division</button></div></div>
+      <div class="grp"><span>Level</span><div class="chips" id="diffs"><button data-v="easy">Easy</button><button data-v="normal">Normal</button><button data-v="hard">Hard</button></div></div>
+      <div class="grp"><button class="btn yel sm" id="gPlay">&#9654; Play now</button><small id="bestline"></small></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap">
+  <div class="sh rv"><span class="tg">FAQs</span><h2>Questions? We've got answers</h2></div>
+  <div class="faq rv">
+    <details><summary>What happens in the free trial class?</summary><p>Your child joins a live, interactive session with a TechyGuide mentor, tries hands-on activities, and we then suggest the best learning path.</p></details>
+    <details><summary>Is the trial class really free?</summary><p>Yes. Booking a trial class does not require any payment.</p></details>
+    <details><summary>Do we need a laptop or desktop?</summary><p>A laptop or desktop is recommended for live classes. Tell us in the form and we'll guide you.</p></details>
+    <details><summary>Which grades can join?</summary><p>Select your child's grade in the form and our team will recommend the right course and level.</p></details>
+    <details><summary>What is the LMS?</summary><p>It's our learning platform where students find lessons, learning games and their progress in one place.</p></details>
+  </div>
+</div></section>
+
+<section class="final"><div class="wrap rv">
+  <h2>Ready for your child's first class?</h2><p>It takes a minute to book – and it's free.</p>
+  <a class="btn yel" href="#book" data-focus>Book a Free Trial Class</a>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span class="flogo"><i><img src="logo.png" alt="" width="24" height="32"></i>© 2026 TechyGuide</span><nav><a href="https://www.techyguide.in/" target="_blank" rel="noopener">Website</a><a href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Courses</a><a href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop</a></nav></div></footer>
+<div class="sticky"><a class="btn org" href="#book" data-focus>Book a Free Trial Class</a></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const tell=(type,extra)=>window.dispatchEvent(new CustomEvent('techy',{detail:{type,...extra}}));
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+$$('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*.07+'s';io.observe(el);});
+$$('[data-focus]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>{const f=$('#card').classList.contains('done')?null:$('#lead .step.on input,#lead .step.on select');f&&f.focus({preventScroll:true});},600)));
+
+/* Techy's speech bubble */
+const say=$('#say'),saytxt=$('#saytxt');let sayT;
+const talk=t=>{if(saytxt.textContent===t)return;clearTimeout(sayT);say.classList.add('sw');sayT=setTimeout(()=>{saytxt.textContent=t;say.classList.remove('sw');},220);tell('talk');};
+const tips={phone:"Share the number you use on WhatsApp – we'll confirm your slot there.",cc:"Pick your country code first.",email:"We'll send the class details to this email.",
+  child:"Your child's name goes on their certificate!",grade:"This helps us pick the right level.",lap:"Live classes run on a laptop or desktop.",
+  course:"Pick what sounds most fun. You can change it later!",slot:"When is your child usually free?",consent:"Last tick and you're in!"};
+$('#lead').addEventListener('focusin',e=>{const k=e.target.id||e.target.name;if(tips[k])talk(tips[k]);tell('focus',{on:true});});
+$('#lead').addEventListener('focusout',()=>setTimeout(()=>{if(!$('#lead').contains(document.activeElement))tell('focus',{on:false});},50));
+
+/* multi-step form */
+const gsel=$('#grade');for(let g=1;g<=12;g++)gsel.insertAdjacentHTML('beforeend',`<option value="${g}">Grade ${g}</option>`);
+const steps=$$('.step'),msg=$('#fmsg'),names=['Contact details','About your child','Your class'];let cur=1;
+const show=n=>{cur=n;steps.forEach(s=>s.classList.toggle('on',+s.dataset.s===n));$$('#prog i').forEach((b,i)=>b.classList.toggle('on',i<n));$('#stp').textContent=`Step ${n} of 3 · ${names[n-1]}`;msg.textContent='';};
+const rules={
+  phone:()=>{const d=$('#phone').value.replace(/\D/g,'');return d.length>=8&&d.length<=12;},
+  email:()=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#email').value.trim()),
+  child:()=>$('#child').value.trim().length>=2,
+  grade:()=>!!$('#grade').value,course:()=>!!$('#course').value,slot:()=>!!$('#slot').value,
+  consent:()=>$('#consent').checked};
+const byStep={1:['phone','email'],2:['child','grade'],3:['course','slot','consent']};
+const mark=k=>{const ok=rules[k]();$('#f-'+k).classList.toggle('err',!ok);return ok;};
+Object.keys(rules).forEach(k=>{const el=$('#f-'+k);['input','change'].forEach(t=>el.addEventListener(t,()=>el.classList.remove('err')));});
+const validStep=n=>{let first=null;byStep[n].forEach(k=>{if(!mark(k)&&!first)first=k;});
+  if(first){const el=document.getElementById(first);el&&el.focus();msg.textContent='Please fill in all the required fields.';tell('oops');talk('Oops – something is missing. Check the red field!');return false;}msg.textContent='';return true;};
+$$('[data-next]').forEach(b=>b.addEventListener('click',()=>{if(validStep(cur)){show(cur+1);tell('step');talk(cur===2?'Nice! Now tell me about your child.':'Almost there – just a few taps more!');}}));
+$$('[data-back]').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
+$$('input[name=lap]').forEach(r=>r.addEventListener('change',()=>{$('#lapwarn').style.display=$('input[name=lap]:checked').value==='no'?'block':'none';}));
+$$('#lead input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'&&cur<3){e.preventDefault();$$('.step.on [data-next]')[0].click();}}));
+function confetti(){const c=['#e28717','#ffcf3f','#00826f','#c9f3de','#ffd6e3'];
+  for(let i=0;i<70;i++){const d=document.createElement('i');d.className='cf';d.style.left=Math.random()*100+'vw';d.style.background=c[i%5];d.style.setProperty('--x',(Math.random()*200-100)+'px');d.style.animationDelay=Math.random()*.5+'s';d.style.borderRadius=Math.random()<.4?'50%':'3px';document.body.appendChild(d);setTimeout(()=>d.remove(),3200);}}
+const params=new URLSearchParams(location.search),utm={};
+['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(k=>{if(params.get(k))utm[k]=params.get(k);});
+$('#lead').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(![1,2,3].every(n=>{if(validStep(n))return true;show(n);return false;}))return;
+  const btn=$('#sbtn');btn.disabled=true;btn.textContent='Booking…';
+  const body={website:$('#website').value,consent:true,utm,source_url:location.href.split('?')[0],
+    phone:$('#cc').value+$('#phone').value.replace(/\D/g,''),email:$('#email').value.trim(),
+    child_name:$('#child').value.trim(),child_grade:$('#grade').value,has_laptop:$('input[name=lap]:checked').value==='yes',
+    course_interest:$('#course').value,preferred_slot:$('#slot').value};
+  try{
+    const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.error||'Something went wrong. Please try again.');
+    $('#okname').textContent=body.child_name.split(' ')[0]+"'s family";
+    $('#card').classList.add('done');confetti();talk('Yay! See you in class!');tell('booked');
+    try{window.fbq&&fbq('track','Lead');}catch{}
+  }catch(err){msg.textContent=err.message;btn.disabled=false;btn.textContent='Book a Free Trial Class';}
+});
+
+})();
+</script>
+
+<!-- Techy the robot -->
+<script type="module" src="robot.js"></script>
+<script src="game.js" defer></script>
+</body>
+</html>

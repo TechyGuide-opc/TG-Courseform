@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bookings Admin | TechyGuide</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1b1840;--mut:#5a5780;--teal:#00826f;--teal2:#00685a;--org:#e28717;--yel:#ffcf3f;--mint:#d6f0e9;--pink:#ffd6e3;--cream:#fff6e6;--bg:#f2faf8;--hd:'Fredoka',system-ui,sans-serif;--bd:'Nunito',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:400 15px/1.5 var(--bd);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--hd);font-weight:600;line-height:1.1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 18px;border-radius:12px;border:2px solid var(--ink);background:#fff;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s;white-space:nowrap}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.pri{background:var(--teal);color:#fff}.btn.org{background:var(--org)}.btn.yel{background:var(--yel)}.btn.sm{height:36px;padding:0 12px;font-size:13px;box-shadow:2px 2px 0 var(--ink)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 24px}
+
+/* login */
+#login{min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--mint)}
+.lcard{width:min(100%,420px);background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 var(--ink);padding:34px 30px}
+.lcard .brand{display:flex;align-items:center;gap:10px;font:700 28px var(--hd);margin-bottom:6px}.lcard .brand img{width:38px;height:50px;object-fit:contain}.lcard .brand b{color:var(--teal)}
+.lcard p{color:var(--mut);margin-bottom:22px}
+.lcard label{display:block;font-weight:800;font-size:14px;margin-bottom:6px}
+.lcard input{width:100%;height:50px;padding:0 16px;border:2px solid var(--ink);border-radius:12px;outline:none;font-size:16px;margin-bottom:14px}
+.lcard input:focus{box-shadow:4px 4px 0 var(--org)}
+.lcard .btn{width:100%;height:50px;font-size:16px}
+.lerr{color:#d4204c;font-weight:800;min-height:20px;margin-top:10px;text-align:center;font-size:14px}
+
+/* top bar */
+header{background:#fff;border-bottom:2px solid var(--ink);position:sticky;top:0;z-index:30}
+header .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand2{display:flex;align-items:center;gap:10px;font:700 24px var(--hd)}.brand2 img{width:32px;height:42px;object-fit:contain}.brand2 b{color:var(--teal)}
+.brand2 em{font:800 11px var(--bd);letter-spacing:.1em;text-transform:uppercase;background:var(--yel);border:2px solid var(--ink);border-radius:99px;padding:2px 10px;margin-left:6px}
+.hactions{display:flex;gap:10px;align-items:center}
+.live{display:flex;align-items:center;gap:7px;font-weight:800;font-size:12px;color:var(--mut);margin-right:6px}.live i{width:9px;height:9px;border-radius:50%;background:#2fbf71;animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(47,191,113,0)}}
+.demo{background:var(--yel);border-bottom:2px solid var(--ink);text-align:center;font-weight:800;padding:6px;font-size:13px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:24px 0 18px}
+.stat{border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:14px 16px;background:#fff}
+.stat span{display:block;font:800 11px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:rgba(27,24,64,.65)}
+.stat b{display:block;font:600 34px var(--hd);line-height:1.1;margin-top:2px}
+.s1{background:#fff}.s2{background:var(--pink)}.s3{background:var(--yel)}.s4{background:#cfe9ff}.s5{background:var(--mint)}.s6{background:#e5def9}
+
+/* toolbar */
+.tool{background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.search{position:relative;flex:1 1 260px}
+.search input{width:100%;height:42px;padding:0 14px 0 40px;border:2px solid var(--ink);border-radius:12px;outline:none}
+.search input:focus{box-shadow:3px 3px 0 var(--org)}
+.search svg{position:absolute;left:12px;top:11px;width:18px;height:18px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{height:36px;padding:0 13px;border-radius:99px;border:2px solid var(--ink);background:#fff;font-weight:800;font-size:13px;cursor:pointer}
+.chips button.on{background:var(--teal);color:#fff}
+.chips button small{opacity:.7;margin-left:4px}
+.tool select{height:42px;border:2px solid var(--ink);border-radius:12px;padding:0 10px;background:#fff;font-weight:700}
+.count{margin-left:auto;font-weight:800;color:var(--mut);font-size:13px}
+
+/* table */
+.tcard{background:#fff;border:2px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;margin-bottom:60px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font:800 11px var(--bd);letter-spacing:.08em;text-transform:uppercase;color:rgba(27,24,64,.65);background:var(--cream);padding:12px 14px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:14px;border-bottom:1.5px solid rgba(27,24,64,.12);vertical-align:top}
+tbody tr.row:hover{background:#fbfdfc}
+td b{display:block;font-weight:800}td small{display:block;color:var(--mut);font-size:12.5px}
+.newb{display:inline-block;background:var(--org);color:#fff;font:800 10px var(--bd);letter-spacing:.06em;padding:2px 7px;border-radius:99px;margin-top:4px}
+.ct a{display:block;font-weight:700;color:var(--teal2)}.ct a:hover{text-decoration:underline}
+.qa{display:flex;gap:6px;margin-top:8px}
+.qa a{width:32px;height:32px;border-radius:10px;border:2px solid var(--ink);display:grid;place-items:center;background:#fff;font-weight:800;font-size:12px;box-shadow:2px 2px 0 var(--ink)}
+.qa a:hover{background:var(--yel)}.qa a.wa{background:#c8f7d8}
+.src{display:inline-block;font:800 11px var(--bd);padding:3px 9px;border-radius:99px;border:2px solid var(--ink);background:#fff}
+.src.meta{background:#cfe9ff}.src.google{background:#ffe0c2}
+.st{height:36px;border-radius:99px;border:2px solid var(--ink);padding:0 12px;font-weight:800;font-size:13px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' fill='none' stroke='%231b1840' stroke-width='2.2'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.st.new{background-color:var(--pink)}.st.contacted{background-color:#cfe9ff}.st.trial_booked{background-color:var(--yel)}.st.enrolled{background-color:#b9efcf}.st.not_interested{background-color:#e4e2ee;color:var(--mut)}
+.act{display:flex;gap:6px}
+.ib{width:34px;height:34px;border-radius:10px;border:2px solid var(--ink);background:#fff;cursor:pointer;display:grid;place-items:center;font-weight:800}
+.ib:hover{background:var(--yel)}.ib.del:hover{background:var(--pink)}
+tr.det td{background:var(--cream);font-size:13px;color:var(--mut)}
+tr.det dl{display:grid;grid-template-columns:130px 1fr;gap:4px 14px}tr.det dt{font-weight:800;color:var(--ink)}tr.det dd{word-break:break-all}
+.empty{padding:60px 20px;text-align:center;color:var(--mut)}.empty h3{color:var(--ink);font-size:24px;margin-bottom:8px}
+.more{padding:16px;text-align:center;border-top:1.5px solid rgba(27,24,64,.12)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:60}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.hide{display:none!important}
+
+@media (max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr.row{padding:14px;border-bottom:2px solid var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+  tr.row td{padding:0;border:0}
+  tr.row td:nth-child(3){grid-column:1/-1}
+  tr.row td:nth-child(6),tr.row td:nth-child(7){display:block}
+  tr.det td{padding:14px}tr.det dl{grid-template-columns:1fr}
+  .count{width:100%;margin:0}
+}
+@media (max-width:560px){.wrap{padding:0 14px}.stats{grid-template-columns:1fr 1fr}.brand2 em,.live{display:none}.hactions .btn span{display:none}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="login">
+  <form class="lcard" id="lform">
+    <div class="brand"><img src="logo.png" alt=""><span>Techy<b>Guide</b></span></div>
+    <p>Bookings admin – enter your admin password to continue.</p>
+    <label for="pw">Admin password</label>
+    <input id="pw" type="password" autocomplete="current-password" required autofocus>
+    <button class="btn pri" type="submit" id="lbtn">Sign in</button>
+    <div class="lerr" id="lerr" role="alert"></div>
+  </form>
+</section>
+
+<!-- APP -->
+<div id="app" class="hide">
+  <div class="demo hide" id="demoBar">DEMO DATA – this is sample data for previewing the dashboard.</div>
+  <header><div class="wrap">
+    <div class="brand2"><img src="logo.png" alt=""><span>Techy<b>Guide</b></span><em>Admin</em></div>
+    <div class="hactions">
+      <span class="live"><i></i>Live · refreshes every minute</span>
+      <button class="btn sm" id="refresh" title="Refresh now">↻ <span>Refresh</span></button>
+      <button class="btn sm yel" id="csv">⬇ <span>Export CSV</span></button>
+      <button class="btn sm" id="logout">Log out</button>
+    </div>
+  </div></header>
+
+  <main class="wrap">
+    <section class="stats" id="stats"></section>
+
+    <section class="tool">
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="#1b1840" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search name, phone or email"></div>
+      <div class="chips" id="chips"></div>
+      <select id="course"><option value="">All courses</option></select>
+      <select id="range"><option value="">All time</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select>
+      <span class="count" id="count"></span>
+    </section>
+
+    <section class="tcard">
+      <table>
+        <thead><tr><th>Booked</th><th>Child</th><th>Contact</th><th>Course &amp; time</th><th>Source</th><th>Status</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty hide" id="empty"></div>
+      <div class="more hide" id="more"><button class="btn sm" id="moreBtn">Show more</button></div>
+    </section>
+  </main>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const STATUS={new:'New',contacted:'Contacted',trial_booked:'Trial booked',enrolled:'Enrolled',not_interested:'Not interested'};
+const DEMO=new URLSearchParams(location.search).has('demo');
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let pw='',leads=[],shown=50,timer=null;
+const F={q:'',status:'',course:'',range:''};
+try{pw=sessionStorage.getItem('tg_admin_pw')||'';}catch{}
+
+/* ---------- api ---------- */
+async function api(method,body){
+  const r=await fetch('/api/admin'+(method==='DELETE'&&body?`?id=${encodeURIComponent(body.id)}`:''),{method,headers:{'x-admin-password':pw,'Content-Type':'application/json'},body:method==='PATCH'?JSON.stringify(body):undefined});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error(j.error||'Request failed');e.status=r.status;throw e;}
+  return j;
+}
+function demoLeads(){
+  const names=[['Aarav Sharma',5,'Coding'],['Diya Patel',3,'Maths'],['Kabir Singh',7,'AI & Robotics'],['Anaya Gupta',4,'Game Development'],['Vihaan Rao',6,'Coding'],['Myra Iyer',2,'Maths'],['Reyansh Das',8,'Not sure yet'],['Saanvi Nair',5,'Coding'],['Arjun Mehta',9,'AI & Robotics'],['Ira Khan',1,'Maths'],['Ayaan Roy',10,'Game Development'],['Kiara Jain',6,'Coding']];
+  const slots=['Weekday evening','Weekend morning','Weekend evening'],sts=['new','new','new','contacted','trial_booked','enrolled','not_interested','new','contacted','new','trial_booked','new'];
+  return names.map((n,i)=>({id:'00000000-0000-4000-8000-'+String(i).padStart(12,'0'),created_at:new Date(Date.now()-i*i*3600e3*1.7-i*900e3).toISOString(),child_name:n[0],child_grade:String(n[1]),phone:'+9198'+String(76543210+i*1111111).slice(0,8),email:n[0].split(' ')[0].toLowerCase()+'.parent@example.com',course_interest:n[2],preferred_slot:slots[i%3],has_laptop:i%5!==3,status:sts[i],utm:i%3===0?{utm_source:'facebook',fbclid:'IwAR'+i}:i%4===1?{gclid:'x'+i}:{},source_url:location.origin+'/',user_agent:'Demo'}));
+}
+
+/* ---------- helpers ---------- */
+const ago=d=>{const s=(Date.now()-new Date(d))/1000;if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';};
+const fmt=d=>new Date(d).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'numeric',minute:'2-digit'});
+const source=l=>{const u=l.utm||{};if(u.utm_source)return{t:u.utm_source,c:/face|meta|insta|fb/i.test(u.utm_source)?'meta':/google/i.test(u.utm_source)?'google':''};if(u.fbclid)return{t:'Meta ad',c:'meta'};if(u.gclid)return{t:'Google ad',c:'google'};return{t:'Direct',c:''};};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2400);};
+const startOfToday=()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime();};
+
+/* ---------- filtering ---------- */
+function filtered(){
+  const q=F.q.trim().toLowerCase(),now=Date.now();
+  return leads.filter(l=>{
+    if(F.status&&l.status!==F.status)return false;
+    if(F.course&&l.course_interest!==F.course)return false;
+    if(F.range==='today'&&new Date(l.created_at).getTime()<startOfToday())return false;
+    if(F.range&&F.range!=='today'&&now-new Date(l.created_at)>F.range*864e5)return false;
+    if(q&&!(`${l.child_name} ${l.phone} ${l.email}`.toLowerCase().includes(q)))return false;
+    return true;
+  });
+}
+
+/* ---------- render ---------- */
+function renderStats(){
+  const today=leads.filter(l=>new Date(l.created_at).getTime()>=startOfToday()).length,week=leads.filter(l=>Date.now()-new Date(l.created_at)<7*864e5).length;
+  const c=s=>leads.filter(l=>l.status===s).length;
+  $('#stats').innerHTML=[['s1','Total bookings',leads.length],['s2','New (to call)',c('new')],['s3','Today',today],['s4','Last 7 days',week],['s5','Trial booked',c('trial_booked')],['s6','Enrolled',c('enrolled')]].map(([k,l,v])=>`<div class="stat ${k}"><span>${l}</span><b>${v}</b></div>`).join('');
+  $('#chips').innerHTML=[['','All']].concat(Object.entries(STATUS)).map(([k,l])=>`<button data-s="${k}" class="${F.status===k?'on':''}">${l}<small>${k?c(k):leads.length}</small></button>`).join('');
+  const courses=[...new Set(leads.map(l=>l.course_interest).filter(Boolean))].sort(),cs=$('#course'),cur=cs.value;
+  cs.innerHTML='<option value="">All courses</option>'+courses.map(x=>`<option ${x===cur?'selected':''}>${esc(x)}</option>`).join('');
+}
+function render(){
+  renderStats();
+  const list=filtered(),vis=list.slice(0,shown);
+  $('#count').textContent=`${list.length} booking${list.length===1?'':'s'}`;
+  $('#rows').innerHTML=vis.map(l=>{
+    const src=source(l),isNew=l.status==='new'&&Date.now()-new Date(l.created_at)<864e5,ph=String(l.phone||'').replace(/[^\d+]/g,''),wa=ph.replace(/\D/g,'');
+    const u=l.utm||{};
+    return `<tr class="row" data-id="${esc(l.id)}">
+      <td><b>${fmt(l.created_at)}</b><small>${ago(l.created_at)}</small>${isNew?'<span class="newb">NEW</span>':''}</td>
+      <td><b>${esc(l.child_name)}</b><small>Grade ${esc(l.child_grade)} · ${l.has_laptop===false?'no laptop':'has laptop'}</small></td>
+      <td class="ct"><a href="tel:${esc(ph)}">${esc(l.phone)}</a><a href="mailto:${esc(l.email)}">${esc(l.email)}</a>
+        <div class="qa"><a class="wa" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener" title="WhatsApp">WA</a><a href="tel:${esc(ph)}" title="Call">☎</a><a href="mailto:${esc(l.email)}" title="Email">✉</a></div></td>
+      <td><b>${esc(l.course_interest)}</b><small>${esc(l.preferred_slot)}</small></td>
+      <td><span class="src ${src.c}">${esc(src.t)}</span></td>
+      <td><select class="st ${esc(l.status)}" data-act="status">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===l.status?'selected':''}>${v}</option>`).join('')}</select></td>
+      <td><div class="act"><button class="ib" data-act="det" title="Details">⋯</button><button class="ib del" data-act="del" title="Delete">✕</button></div></td>
+    </tr>
+    <tr class="det hide" data-for="${esc(l.id)}"><td colspan="7"><dl>
+      <dt>Booked at</dt><dd>${esc(new Date(l.created_at).toLocaleString('en-IN'))}</dd>
+      <dt>Page</dt><dd>${esc(l.source_url||'-')}</dd>
+      <dt>Campaign data</dt><dd>${Object.keys(u).length?esc(Object.entries(u).map(([k,v])=>k+'='+v).join('  ·  ')):'none'}</dd>
+      <dt>Device</dt><dd>${esc(l.user_agent||'-')}</dd>
+      <dt>Booking ID</dt><dd>${esc(l.id)}</dd></dl></td></tr>`;
+  }).join('');
+  const empty=$('#empty');
+  empty.classList.toggle('hide',vis.length>0);
+  if(!vis.length)empty.innerHTML=leads.length?'<h3>No matches</h3><p>Try clearing the search or filters.</p>':'<h3>No bookings yet</h3><p>New trial-class bookings will appear here automatically.<br>If you expect bookings, check that <b>SUPABASE_SERVICE_ROLE_KEY</b> in Vercel is the secret <i>service_role</i> key.</p>';
+  $('#more').classList.toggle('hide',list.length<=shown);
+}
+
+/* ---------- actions ---------- */
+async function load(manual){
+  try{
+    if(DEMO){if(!leads.length)leads=demoLeads();}
+    else leads=(await api('GET')).leads||[];
+    render();if(manual)toast('Updated');
+  }catch(e){
+    if(e.status===401){logout('Session expired – please sign in again.');}
+    else toast(e.message);
+  }
+}
+function showApp(){$('#login').classList.add('hide');$('#app').classList.remove('hide');$('#demoBar').classList.toggle('hide',!DEMO);load();clearInterval(timer);timer=setInterval(()=>{if(!document.hidden)load();},60000);}
+function logout(msg){pw='';try{sessionStorage.removeItem('tg_admin_pw');}catch{}clearInterval(timer);$('#app').classList.add('hide');$('#login').classList.remove('hide');$('#pw').value='';$('#lerr').textContent=msg||'';}
+
+$('#lform').addEventListener('submit',async e=>{
+  e.preventDefault();const b=$('#lbtn');b.disabled=true;b.textContent='Checking…';$('#lerr').textContent='';
+  pw=$('#pw').value;
+  try{leads=(await api('GET')).leads||[];try{sessionStorage.setItem('tg_admin_pw',pw);}catch{}showApp();}
+  catch(err){$('#lerr').textContent=err.status===401?'Wrong password.':err.message;}
+  b.disabled=false;b.textContent='Sign in';
+});
+$('#logout').onclick=()=>logout();
+$('#refresh').onclick=()=>load(true);
+$('#q').addEventListener('input',e=>{F.q=e.target.value;shown=50;render();});
+$('#course').onchange=e=>{F.course=e.target.value;shown=50;render();};
+$('#range').onchange=e=>{F.range=e.target.value;shown=50;render();};
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;F.status=b.dataset.s;shown=50;render();});
+$('#moreBtn').onclick=()=>{shown+=50;render();};
+
+$('#rows').addEventListener('change',async e=>{
+  const sel=e.target.closest('[data-act=status]');if(!sel)return;
+  const id=sel.closest('tr').dataset.id,l=leads.find(x=>x.id===id),prev=l.status,next=sel.value;
+  l.status=next;sel.className='st '+next;renderStats();
+  try{if(!DEMO)await api('PATCH',{id,status:next});toast('Status: '+STATUS[next]);}
+  catch(err){l.status=prev;sel.value=prev;sel.className='st '+prev;renderStats();toast(err.message);}
+});
+$('#rows').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.tagName==='SELECT')return;
+  const tr=b.closest('tr'),id=tr.dataset.id;
+  if(b.dataset.act==='det'){const d=$(`tr.det[data-for="${CSS.escape(id)}"]`);d.classList.toggle('hide');return;}
+  if(b.dataset.act==='del'){
+    const l=leads.find(x=>x.id===id);
+    if(!confirm(`Delete the booking for ${l.child_name}? This cannot be undone.`))return;
+    try{if(!DEMO)await api('DELETE',{id});leads=leads.filter(x=>x.id!==id);render();toast('Booking deleted');}catch(err){toast(err.message);}
+  }
+});
+
+$('#csv').onclick=()=>{
+  const rows=filtered(),cols=['created_at','child_name','child_grade','phone','email','course_interest','preferred_slot','has_laptop','status','source','source_url'];
+  const q=v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`;
+  const csv=[cols.join(',')].concat(rows.map(l=>cols.map(c=>q(c==='source'?source(l).t:l[c])).join(','))).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download=`techyguide-bookings-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(a.href);
+  toast(`Exported ${rows.length} bookings`);
+};
+
+/* ---------- start ---------- */
+if(DEMO)showApp();
+else if(pw){leads=[];api('GET').then(j=>{leads=j.leads||[];showApp();}).catch(()=>logout());}
+})();
+</script>
+</body>
+</html>
