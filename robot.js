@@ -85,9 +85,13 @@ const badgeTex=new THREE.CanvasTexture(bc);badgeTex.colorSpace=THREE.SRGBColorSp
 let logoImg=null;
 function drawBadge(){
   const c=bc.getContext('2d');c.clearRect(0,0,512,170);
-  let x0=40;
-  if(logoImg){const hh=140,ww=hh*logoImg.width/logoImg.height;c.drawImage(logoImg,34,15,ww,hh);x0=34+ww+22;}
-  c.textBaseline='middle';c.font='700 74px Fredoka, Nunito, system-ui, sans-serif';
+  let x0=34;
+  if(logoImg){const hh=140,ww=hh*logoImg.width/logoImg.height;c.drawImage(logoImg,30,15,ww,hh);x0=30+ww+18;}
+  c.textBaseline='middle';
+  const avail=512-x0-22;let size=74;                       // shrink the wordmark until all of "TechyGuide" fits
+  c.font='700 '+size+'px Fredoka, Nunito, system-ui, sans-serif';
+  const full=c.measureText('TechyGuide').width;
+  if(full>avail){size=Math.floor(size*avail/full);c.font='700 '+size+'px Fredoka, Nunito, system-ui, sans-serif';}
   c.fillStyle='#1b1840';c.fillText('Techy',x0,88);const w=c.measureText('Techy').width;
   c.fillStyle='#00826f';c.fillText('Guide',x0+w,88);
   badgeTex.needsUpdate=true;
