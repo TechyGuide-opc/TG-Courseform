@@ -317,6 +317,21 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 .mfig:nth-child(1){grid-column:span 2;grid-row:span 2}.mfig:nth-child(6),.mfig:nth-child(7){grid-column:span 2}
 @media (max-width:900px){.cgrid{grid-template-columns:1fr 1fr}.mgrid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.mfig:nth-child(1){grid-column:span 2;grid-row:span 2}.mfig:nth-child(6),.mfig:nth-child(7){grid-column:span 2}}
 @media (max-width:560px){.cgrid{grid-template-columns:1fr}.mgrid{grid-auto-rows:150px;gap:12px}}
+
+.sr{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;overflow:hidden}
+.dd{position:relative}
+.ddbtn{width:100%;height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;border:2px solid var(--ink);border-radius:12px;background:#fff;font:600 16px var(--bd);cursor:pointer;text-align:left;transition:box-shadow .15s,transform .15s}
+.ddbtn:focus-visible,.ddbtn[aria-expanded=true]{outline:0;box-shadow:4px 4px 0 var(--org);transform:translate(-2px,-2px)}
+.ddval{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.ddval.dph{color:#9b98b8;font-weight:500}
+.ddbtn svg{width:14px;height:9px;flex:none;transition:transform .2s}.ddbtn[aria-expanded=true] svg{transform:rotate(180deg)}
+.ddlist{position:absolute;left:0;right:0;top:calc(100% + 10px);z-index:40;max-height:310px;overflow:auto;margin:0;padding:8px;list-style:none;background:#fff;border:2px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);animation:ddin .15s ease;overscroll-behavior:contain}
+.ddlist[hidden]{display:none}
+.ddlist li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;outline:0}
+.ddlist li:hover,.ddlist li:focus{background:var(--cream)}
+.ddlist li[aria-selected=true]{background:var(--yel)}
+.ddtag{font:800 10.5px var(--bd);letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);border-radius:99px;padding:1px 8px;background:#fff;white-space:nowrap;flex:none}
+.f.err .ddbtn{border-color:#d4204c;background:#fff4f6}
+@keyframes ddin{from{opacity:0;transform:translateY(-6px)}}
 @media (max-width:1060px){
   .links{display:none}
   .hero .wrap{grid-template-columns:1fr;gap:10px}
@@ -418,7 +433,10 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
           <button class="back" type="button" data-back>← Back</button>
         </div>
         <div class="step" data-s="3">
-          <div class="f" id="f-course"><label for="course">What should we start with?</label><select id="course"><option value="">Select a course</option><option>Coding</option><option>Maths</option><option>AI &amp; Robotics</option><option>Game Development</option><option>Not sure yet</option></select><span class="em">Select a course</span></div>
+          <div class="f" id="f-course"><span class="lab" id="courselbl">What should we start with?</span>
+          <select id="course" class="sr" tabindex="-1" aria-hidden="true"><option value="">Select a course</option><option>Robo Champ Course</option><option>Python Programming</option><option>Scratch Programming</option><option>Web Development</option><option>App Development</option><option>Game Development</option><option>Artificial Intelligence</option><option>Internet of Things (IoT)</option><option>Electronics</option><option>Other / Not sure yet</option></select>
+          <div class="dd" id="dd"><button type="button" class="ddbtn" id="coursebtn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="courselbl coursebtn"><span class="ddval dph" id="ddval">Select a course</span><svg viewBox="0 0 14 9" fill="none" stroke="#1b1840" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6 6-6"/></svg></button><ul class="ddlist" id="ddlist" role="listbox" aria-labelledby="courselbl" hidden></ul></div>
+          <span class="em">Select a course</span></div>
           <div class="f" id="f-slot"><label for="slot">Preferred time</label><select id="slot"><option value="">Select a slot</option><option>Weekday evening</option><option>Weekend morning</option><option>Weekend evening</option></select><span class="em">Select a time slot</span></div>
           <div class="f" id="f-consent"><label class="chk"><input type="checkbox" id="consent"><span>I'm the parent / guardian and agree to be contacted by TechyGuide about this trial class.</span></label><span class="em">Consent is required</span></div>
           <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -592,7 +610,7 @@ const say=$('#say'),saytxt=$('#saytxt');let sayT;
 const talk=t=>{if(saytxt.textContent===t)return;clearTimeout(sayT);say.classList.add('sw');sayT=setTimeout(()=>{saytxt.textContent=t;say.classList.remove('sw');},220);tell('talk');};
 const tips={phone:"Share the number you use on WhatsApp – we'll confirm your slot there.",cc:"Pick your country code first.",email:"We'll send the class details to this email.",
   child:"Your child's name goes on their certificate!",grade:"This helps us pick the right level.",lap:"Live classes run on a laptop or desktop.",
-  course:"Pick what sounds most fun. You can change it later!",slot:"When is your child usually free?",consent:"Last tick and you're in!"};
+  course:"Pick what sounds most fun. You can change it later!",coursebtn:"Pick what sounds most fun. You can change it later!",slot:"When is your child usually free?",consent:"Last tick and you're in!"};
 $('#lead').addEventListener('focusin',e=>{const k=e.target.id||e.target.name;if(tips[k])talk(tips[k]);tell('focus',{on:true});});
 $('#lead').addEventListener('focusout',()=>setTimeout(()=>{if(!$('#lead').contains(document.activeElement))tell('focus',{on:false});},50));
 
@@ -610,7 +628,7 @@ const byStep={1:['phone','email'],2:['child','grade'],3:['course','slot','consen
 const mark=k=>{const ok=rules[k]();$('#f-'+k).classList.toggle('err',!ok);return ok;};
 Object.keys(rules).forEach(k=>{const el=$('#f-'+k);['input','change'].forEach(t=>el.addEventListener(t,()=>el.classList.remove('err')));});
 const validStep=n=>{let first=null;byStep[n].forEach(k=>{if(!mark(k)&&!first)first=k;});
-  if(first){const el=document.getElementById(first);el&&el.focus();msg.textContent='Please fill in all the required fields.';tell('oops');talk('Oops – something is missing. Check the red field!');return false;}msg.textContent='';return true;};
+  if(first){const el=document.getElementById(first==='course'?'coursebtn':first);el&&el.focus();msg.textContent='Please fill in all the required fields.';tell('oops');talk('Oops – something is missing. Check the red field!');return false;}msg.textContent='';return true;};
 $$('[data-next]').forEach(b=>b.addEventListener('click',()=>{if(validStep(cur)){show(cur+1);tell('step');talk(cur===2?'Nice! Now tell me about your child.':'Almost there – just a few taps more!');}}));
 $$('[data-back]').forEach(b=>b.addEventListener('click',()=>show(cur-1)));
 $$('input[name=lap]').forEach(r=>r.addEventListener('change',()=>{$('#lapwarn').style.display=$('input[name=lap]:checked').value==='no'?'block':'none';}));
@@ -630,7 +648,7 @@ $('#lead').addEventListener('submit',async e=>{
   try{
     const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     const j=await r.json().catch(()=>({}));
-    if(!r.ok)throw new Error(j.error||'Something went wrong. Please try again.');
+    if(!r.ok){console.warn('Booking failed',r.status,j.code||'','- open /api/health to see why');throw new Error(j.error||'Something went wrong. Please try again.');}
     $('#okname').textContent=body.child_name.split(' ')[0]+"'s family";
     $('#card').classList.add('done');confetti();talk('Yay! See you in class!');tell('booked');
     try{window.fbq&&fbq('track','Lead');}catch{}
@@ -678,6 +696,41 @@ $('#lead').addEventListener('submit',async e=>{
     card.addEventListener('mouseenter',function(){paused=true;});card.addEventListener('mouseleave',function(){paused=false;});
     show(0,true);restart();
   }
+})();
+</script>
+<script>
+/* styled course picker (the hidden <select id="course"> keeps the value + validation) */
+(function(){
+  var sel=document.getElementById('course'),btn=document.getElementById('coursebtn'),list=document.getElementById('ddlist'),val=document.getElementById('ddval');
+  if(!sel||!btn)return;
+  var CAT={'Robo Champ Course':['Robotics','#ffd6e3'],'Python Programming':['Coding','#fff0b8'],'Scratch Programming':['Beginner','#d6f0e9'],'Web Development':['Web','#cfe9ff'],'App Development':['Apps','#e5def9'],'Game Development':['Games','#ffe0c2'],'Artificial Intelligence':['AI','#ffd6e3'],'Internet of Things (IoT)':['IoT','#cfe9ff'],'Electronics':['Electronics','#d6f0e9'],'Other / Not sure yet':['Help me choose','#fff6e6']};
+  var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');};
+  var items=[].slice.call(sel.options).filter(function(o){return o.value;}).map(function(o){return o.value;});
+  list.innerHTML=items.map(function(v,i){var c=CAT[v]||['','#fff'];return '<li role="option" tabindex="-1" data-v="'+esc(v)+'" aria-selected="false"><span>'+esc(v)+'</span><span class="ddtag" style="background:'+c[1]+'">'+esc(c[0])+'</span></li>';}).join('');
+  var lis=function(){return [].slice.call(list.children);};
+  function isOpen(){return !list.hidden;}
+  function open(){list.hidden=false;btn.setAttribute('aria-expanded','true');var s=lis().filter(function(l){return l.getAttribute('aria-selected')==='true';})[0]||list.firstChild;s.focus();s.scrollIntoView({block:'nearest'});}
+  function close(back){list.hidden=true;btn.setAttribute('aria-expanded','false');if(back)btn.focus();}
+  function choose(v){
+    sel.value=v;sel.dispatchEvent(new Event('change',{bubbles:true}));
+    var c=CAT[v]||['','#fff'];val.classList.remove('dph');val.innerHTML=esc(v)+' <span class="ddtag" style="background:'+c[1]+'">'+esc(c[0])+'</span>';
+    lis().forEach(function(l){l.setAttribute('aria-selected',l.dataset.v===v?'true':'false');});
+    close(true);
+  }
+  btn.addEventListener('click',function(){isOpen()?close():open();});
+  btn.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open();}});
+  list.addEventListener('click',function(e){var l=e.target.closest('li');if(l)choose(l.dataset.v);});
+  list.addEventListener('keydown',function(e){
+    var a=lis(),i=a.indexOf(document.activeElement);
+    if(e.key==='ArrowDown'){e.preventDefault();(a[i+1]||a[0]).focus();}
+    else if(e.key==='ArrowUp'){e.preventDefault();(a[i-1]||a[a.length-1]).focus();}
+    else if(e.key==='Home'){e.preventDefault();a[0].focus();}
+    else if(e.key==='End'){e.preventDefault();a[a.length-1].focus();}
+    else if(e.key==='Enter'||e.key===' '){e.preventDefault();if(i>=0)choose(a[i].dataset.v);}
+    else if(e.key==='Escape'){e.preventDefault();close(true);}
+    else if(e.key==='Tab'){close(false);}
+  });
+  document.addEventListener('click',function(e){if(isOpen()&&!e.target.closest('#dd'))close(false);});
 })();
 </script>
 <script>

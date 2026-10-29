@@ -1,0 +1,8 @@
+# secrets - never commit these
+.env
+.env.*
+!.env.example
+.vercel
+node_modules
+robot.backup.js
+logo-original.png

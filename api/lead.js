@@ -3,7 +3,12 @@
 // (the key never reaches the browser; the `leads` table has RLS on and no public policies).
 
 const GRADES = ['1','2','3','4','5','6','7','8','9','10','11','12'];
-const COURSES = ['Coding','Maths','AI & Robotics','Game Development','Not sure yet'];
+const COURSES = [
+  'Robo Champ Course', 'Python Programming', 'Scratch Programming', 'Web Development', 'App Development',
+  'Game Development', 'Artificial Intelligence', 'Internet of Things (IoT)', 'Electronics', 'Other / Not sure yet',
+  // older form values, kept so cached pages still work
+  'Coding', 'Maths', 'AI & Robotics', 'Not sure yet',
+];
 const SLOTS = ['Weekday evening','Weekend morning','Weekend evening'];
 
 const clean = (v, max) => String(v == null ? '' : v).trim().slice(0, max);
@@ -63,8 +68,11 @@ module.exports = async (req, res) => {
       body: JSON.stringify(row),
     });
     if (!r.ok) {
-      console.error('Supabase insert failed', r.status, await r.text());
-      return res.status(502).json({ error: 'Could not save your booking. Please try again.' });
+      let info = {};
+      try { info = JSON.parse(await r.text()); } catch { /* not JSON */ }
+      console.error('Supabase insert failed', r.status, info);
+      // `code` is a short Postgres/PostgREST error code (e.g. 42501 = permission, PGRST205 = table missing); open /api/health for a plain-English diagnosis
+      return res.status(502).json({ error: 'Could not save your booking. Please try again.', code: info.code || String(r.status) });
     }
     return res.status(200).json({ ok: true });
   } catch (e) {

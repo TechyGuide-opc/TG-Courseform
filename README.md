@@ -34,7 +34,15 @@ Preview with sample data (no login): `/admin.html?demo=1`.
 - If your project is already paused, click **Restore project** in the Supabase dashboard once; the cron keeps it awake from then on.
 - Free-plan Vercel allows one cron run per day, which is plenty for a 7-day limit.
 
+## Troubleshooting: "Could not save your booking"
+1. Open **`/api/health`** on your site. It tells you in plain English what is wrong (missing env var, wrong key type, missing table or columns) and never saves anything.
+2. Most common causes:
+   - `SUPABASE_SERVICE_ROLE_KEY` is the *publishable* key (`sb_publishable_...`). It must be the **secret** key (`sb_secret_...` or `service_role`).
+   - The `leads` table was created from an older `schema.sql`. Run `supabase/schema.sql` again in the Supabase SQL editor (it upgrades older tables safely).
+   - Quick alternative if you cannot get the secret key right now: in `supabase/schema.sql`, switch on the optional step 5 (remove the leading `--` from its two lines) and run the file again. The form will then save with the publishable key (insert-only). The admin page still needs the secret key.
+3. After changing Vercel environment variables, **redeploy** (they only apply to new deployments).
+
 ## Notes
 - Course cards, FAQ answers and grade list (1-12) are generic placeholders – edit them in `index.html` to match what TechyGuide really offers.
-- If you already ran an older schema.sql, run: `alter table leads drop column parent_name; alter table leads add column has_laptop boolean not null default true;`
+- If you already ran an older schema.sql, just run the current `supabase/schema.sql` again; it upgrades the table safely.
 - Edit the form options (courses, slots, grades) in both `index.html` and `api/lead.js` (the API whitelists them).
