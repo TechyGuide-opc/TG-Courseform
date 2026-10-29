@@ -249,9 +249,6 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 .band{background:var(--ink);color:#fff;border-block:2px solid var(--ink)}
 .bandgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:26px;padding-bottom:26px}
 .bandgrid div{text-align:center}.bandgrid b{display:block;font:700 42px/1.1 var(--hd);color:var(--yel)}.bandgrid span{font-weight:700;opacity:.85}
-.trust{text-align:center;padding:30px 0 0;font:600 clamp(22px,2.6vw,32px)/1.2 var(--hd);color:#fff}.trust b{color:var(--yel);font-weight:700}.trust span{display:block;font:italic 600 clamp(15px,1.5vw,18px)/1.4 var(--bd);opacity:.85;margin-top:10px}
-.bandgrid{border-top:1px solid rgba(255,255,255,.18);margin-top:24px}
-.bgrid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .benefits li{display:flex;gap:16px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:18px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
 .benefits li:hover{transform:translate(-2px,-2px)}
 .benefits i{font-style:normal;flex:none;width:42px;height:42px;border-radius:12px;border:2px solid var(--ink);display:grid;place-items:center;font:700 19px var(--hd);background:var(--yel)}
@@ -266,15 +263,6 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 .sfig.wide img{border-bottom:0;border-right:2px solid var(--ink);aspect-ratio:auto;min-height:260px}
 .sfig figcaption{padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px;justify-content:center}
 .sfig .ctag{align-self:flex-start}.sfig b{font:600 24px/1.15 var(--hd)}.sfig small{color:var(--mut);font-weight:600;font-size:15px}
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.cchip{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:20px;padding:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
-.cchip:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
-.cchip b{font:600 22px/1.15 var(--hd)}.cchip small{color:var(--mut);font-weight:600;font-size:14.5px}
-.cchip:nth-child(3n+1){background:#fff7d9}.cchip:nth-child(3n+2){background:#e6f7f1}.cchip:nth-child(3n){background:#fde8ef}
-.slist{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.srow{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:16px 20px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s}
-.srow:hover{transform:translate(-2px,-2px)}
-.srow b{display:block;font:600 20px/1.2 var(--hd)}.srow small{color:var(--mut);font-weight:600;font-size:13.5px}
 .price{display:flex;gap:8px;align-items:baseline;font:700 22px var(--hd);white-space:nowrap}.price s{font:600 14px var(--bd);color:var(--mut)}
 .price em{font:800 11px var(--bd);font-style:normal;background:var(--org);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:1px 8px;align-self:center}
 .stories{background:#fff6e6;border-block:2px solid var(--ink)}
@@ -299,6 +287,36 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 .sctl{display:flex;gap:10px;margin-top:18px}
 @media (max-width:900px){.bandgrid{grid-template-columns:1fr 1fr}.bgrid,.cgrid{grid-template-columns:1fr 1fr}.sgrid{grid-template-columns:1fr;gap:34px}.sfig.wide{grid-template-columns:1fr}.sfig.wide img{border-right:0;border-bottom:2px solid var(--ink);aspect-ratio:16/9;min-height:0}.slist{grid-template-columns:1fr}.collage{height:340px}.scard{padding:26px 22px 22px}.sq{font-size:19px}}
 @media (max-width:560px){.bgrid,.cgrid,.sbento{grid-template-columns:1fr}.bandgrid b{font-size:32px}.collage{height:290px}.srow{flex-direction:column;align-items:flex-start}}
+
+.tg2{display:inline-block;background:#fff;border:2px solid var(--ink);border-radius:99px;padding:4px 16px;font:800 12.5px var(--bd);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}.h2s{font-size:clamp(32px,3.8vw,50px)}
+.whygrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.whyimg{position:relative}
+.whyimg img{width:100%;height:auto;display:block;border:3px solid var(--ink);border-radius:28px;box-shadow:8px 8px 0 var(--ink);background:var(--mint)}
+.fchip{position:absolute;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:8px 14px;font-weight:800;box-shadow:3px 3px 0 var(--ink);font-size:14px;transform:rotate(-3deg)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.pcard{position:relative;background:#fff;border:2px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.pcard:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.pimg{aspect-ratio:4/3;background:#f2f5fb;border-bottom:2px solid var(--ink);overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.pcard:hover .pimg img{transform:scale(1.05)}
+.pbadge{position:absolute;left:14px;top:14px;z-index:2;background:var(--org);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:2px 11px;font:800 12px var(--bd)}
+.pb{padding:16px 18px 20px}.pb h3{font-size:21px}.pb small{display:block;color:var(--mut);font-weight:600;font-size:13.5px;margin:4px 0 10px}
+@media (max-width:900px){.whygrid{grid-template-columns:1fr;gap:34px}.pgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr}}
+
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cchip{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:#fff;border:2px solid var(--ink);border-radius:20px;padding:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.cchip:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
+.cchip b{font:600 22px/1.15 var(--hd)}.cchip small{color:var(--mut);font-weight:600;font-size:14.5px}
+.cchip:nth-child(3n+1){background:#fff7d9}.cchip:nth-child(3n+2){background:#e6f7f1}.cchip:nth-child(3n){background:#fde8ef}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:16px}
+.mfig{position:relative;margin:0;overflow:hidden;border:2px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);background:#e9eef6}
+.mfig img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.mfig:hover img{transform:scale(1.06)}
+.mfig figcaption{position:absolute;left:12px;bottom:12px;background:#fff;border:2px solid var(--ink);border-radius:99px;padding:3px 12px;font:800 12.5px var(--bd);box-shadow:2px 2px 0 var(--ink)}
+.mfig:nth-child(1){grid-column:span 2;grid-row:span 2}.mfig:nth-child(6),.mfig:nth-child(7){grid-column:span 2}
+@media (max-width:900px){.cgrid{grid-template-columns:1fr 1fr}.mgrid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.mfig:nth-child(1){grid-column:span 2;grid-row:span 2}.mfig:nth-child(6),.mfig:nth-child(7){grid-column:span 2}}
+@media (max-width:560px){.cgrid{grid-template-columns:1fr}.mgrid{grid-auto-rows:150px;gap:12px}}
 @media (max-width:1060px){
   .links{display:none}
   .hero .wrap{grid-template-columns:1fr;gap:10px}
@@ -320,6 +338,7 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
   .stage{height:340px}.say{font-size:14px}
   .ph{grid-template-columns:92px 1fr}
 }
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
 </style>
 </head>
@@ -424,29 +443,43 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
   </div>
 </div></section>
 
-<div class="band"><div class="wrap"><p class="trust">Trusted by <b>800+ schools</b> &amp; <b>200K+ students</b><span>&ldquo;Where curious minds become future innovators&rdquo;</span></p></div><div class="wrap bandgrid">
-  <div><b>200K+</b><span>students registered</span></div><div><b>800+</b><span>schools trusted</span></div><div><b>13</b><span>courses to choose from</span></div><div><b>Free</b><span>shipping across India</span></div>
+<div class="band"><div class="wrap bandgrid">
+  <div><b>200K+</b><span>students registered</span></div><div><b>800+</b><span>schools trusted</span></div><div><b>13</b><span>courses to choose from</span></div><div><b>Trusted</b><span>by schools &amp; families across India</span></div>
 </div></div>
 
-<section class="sec" id="why"><div class="wrap">
-  <div class="sh rv"><span class="tg">Why TechyGuide</span><h2>Why learn robotics, coding &amp; AI today?</h2></div>
-  <ul class="benefits bgrid">
-    <li class="rv"><i>1</i><div><b>Build smart machines, not just use them</b><span>Kids assemble and program real robots and see how technology works from the inside.</span></div></li>
-    <li class="rv"><i>2</i><div><b>Learn the technology shaping the future</b><span>AI, IoT and automation made simple &ndash; with projects instead of textbooks.</span></div></li>
-    <li class="rv"><i>3</i><div><b>Create the digital world</b><span>Games, apps and websites: children learn to make things, not only play with them.</span></div></li>
-    <li class="rv"><i>4</i><div><b>A strong foundation in coding</b><span>Python, Scratch and logic skills that carry into school and beyond.</span></div></li>
-    <li class="rv"><i>5</i><div><b>Turn ideas into real applications</b><span>From a first idea to a working project, step by step with mentors.</span></div></li>
-  </ul>
+<section class="sec" id="why"><div class="wrap whygrid">
+  <div class="whyimg rv"><img src="img/hero-kid.webp" alt="A girl learning robotics and coding with a TechyGuide kit" width="600" height="400" loading="lazy" decoding="async"><span class="fchip" style="left:-14px;top:26px">Hands-on kits</span><span class="fchip" style="right:-12px;bottom:70px;background:var(--yel)">Live + LMS</span></div>
+  <div class="rv"><span class="tg2">Why TechyGuide</span><h2 class="h2s">Why learn robotics, coding &amp; AI today?</h2>
+    <ul class="benefits">
+      <li><i>1</i><div><b>Build smart machines, not just use them</b><span>Kids assemble and program real robots and see how technology works from the inside.</span></div></li>
+      <li><i>2</i><div><b>Learn the technology shaping the future</b><span>AI, IoT and automation made simple &ndash; with projects instead of textbooks.</span></div></li>
+      <li><i>3</i><div><b>Create the digital world</b><span>Games, apps and websites: children learn to make things, not only play with them.</span></div></li>
+      <li><i>4</i><div><b>A strong foundation in coding</b><span>Python, Scratch and logic skills that carry into school and beyond.</span></div></li>
+      <li><i>5</i><div><b>Turn ideas into real applications</b><span>From a first idea to a working project, step by step with mentors.</span></div></li>
+    </ul></div>
 </div></section>
 
 <section class="sec" id="schools" style="background:var(--mint);border-block:2px solid var(--ink)"><div class="wrap">
   <div class="sh rv"><span class="tg">For schools &amp; teachers</span><h2>A support ecosystem schools can rely on</h2><p>Hands-on teacher training, kits and live sessions for CBSE, ICSE and STEM tinkering programs.</p></div>
   <div class="sbento">
-    <figure class="sfig wide rv"><img src="img/school-cbse.webp" alt="Trainers helping teachers set up a 3D printer in a school lab" width="900" height="444" loading="lazy" decoding="async"><figcaption><span class="ctag">CBSE</span><b>Hands-on teacher training</b><small>Teachers learn 3D printing and build skills right in the school lab.</small></figcaption></figure>
-    <figure class="sfig rv"><img src="img/school-icse.webp" alt="A trainer coaching a teacher on a laptop with a robotics kit" width="720" height="355" loading="lazy" decoding="async"><figcaption><span class="ctag">ICSE</span><b>Guided robotics sessions</b><small>Trainers coach teachers step by step with kits and laptops.</small></figcaption></figure>
-    <figure class="sfig rv"><img src="img/school-stem.webp" alt="A live online Python coding session on screen share" width="670" height="364" loading="lazy" decoding="async"><figcaption><span class="ctag">STEM Tinkering</span><b>Live online coding sessions</b><small>Screen-share walkthroughs of real Python projects, from anywhere.</small></figcaption></figure>
+    <figure class="sfig wide rv"><img src="img/school-cbse.webp" alt="Trainers helping teachers set up a 3D printer in a school lab" width="900" height="444" loading="lazy" decoding="async"><figcaption><span class="ctag">3D Printing</span><b>Hands-on teacher training</b><small>Teachers learn 3D printing and build skills right in the school lab.</small></figcaption></figure>
+    <figure class="sfig rv"><img src="img/school-icse.webp" alt="A trainer coaching a teacher on a laptop with a robotics kit" width="720" height="355" loading="lazy" decoding="async"><figcaption><span class="ctag">Teacher Training</span><b>Guided robotics sessions</b><small>Trainers coach teachers step by step with kits and laptops.</small></figcaption></figure>
+    <figure class="sfig rv"><img src="img/school-stem.webp" alt="A live online Python coding session on screen share" width="670" height="364" loading="lazy" decoding="async"><figcaption><span class="ctag">Live Coding</span><b>Live online coding sessions</b><small>Screen-share walkthroughs of real Python projects, from anywhere.</small></figcaption></figure>
   </div>
   <div class="ctarow rv"><a class="btn pri" href="#book" data-focus>Book a free demo</a><a class="btn" href="https://www.techyguide.in/courses" target="_blank" rel="noopener">Explore programs</a></div>
+</div></section>
+
+<section class="sec" id="moments"><div class="wrap">
+  <div class="sh rv"><span class="tg">Real classrooms, real kids</span><h2>Moments from our labs &amp; workshops</h2><p>Students building, coding and exploring with TechyGuide kits in schools across India.</p></div>
+  <div class="mgrid">
+    <figure class="mfig rv"><img src="img/moment-handson.webp" alt="Two students building a robot car in class" width="760" height="570" loading="lazy" decoding="async"><figcaption>Hands-on robotics in class</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-workshop.webp" alt="Girls building electronics kits at a workshop table" width="560" height="315" loading="lazy" decoding="async"><figcaption>Students building with kits</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-lab.webp" alt="Students working in an AI and robotics lab" width="560" height="419" loading="lazy" decoding="async"><figcaption>AI &amp; robotics lab</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-stall.webp" alt="TechyGuide STEM robotics stall at a school event" width="560" height="250" loading="lazy" decoding="async"><figcaption>STEM robotics showcase</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-class.webp" alt="A trainer teaching a school class about robotics" width="560" height="258" loading="lazy" decoding="async"><figcaption>Classroom session</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-team.webp" alt="Trainers and students building with robotics kits around a table" width="700" height="394" loading="lazy" decoding="async"><figcaption>Trainers &amp; students at work</figcaption></figure>
+    <figure class="mfig rv"><img src="img/moment-launch.webp" alt="Students showing robotics kits to guests at a school lab event" width="700" height="394" loading="lazy" decoding="async"><figcaption>School lab launch</figcaption></figure>
+  </div>
 </div></section>
 
 <section class="sec" id="courses"><div class="wrap">
@@ -467,13 +500,13 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 
 <section class="sec" id="shop" style="background:var(--cream);border-block:2px solid var(--ink)"><div class="wrap">
   <div class="sh rv"><span class="tg">Techy Shop</span><h2>Build it. Code it. Print it.</h2><p>Robotics kits, electronics and courses delivered to your door &ndash; free shipping across India.</p></div>
-  <div class="slist">
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>TeBoT Champ Kit</b><small>Multi-Servo Smart Automation &amp; Robotics Kit</small></div><div class="price"><em>6% off</em><b>&#8377;7,499</b><s>&#8377;7,999</s></div></a>
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>TechBoT Arduino Kit</b><small>Robotics &amp; sensor kit built on Arduino</small></div><div class="price"><b>&#8377;3,099</b></div></a>
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Otto Spider Kit</b><small>Build and program your own walking robot</small></div><div class="price"><b>&#8377;4,199</b></div></a>
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Robotic Arm Kit</b><small>Hands-on robotic arm for budding engineers</small></div><div class="price"><b>&#8377;4,900</b></div></a>
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Electronics Course</b><small>Kit-based electronics learning at home</small></div><div class="price"><b>&#8377;7,999</b></div></a>
-    <a class="srow rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div><b>Game Development Course</b><small>Learn to design and code your own games</small></div><div class="price"><b>&#8377;3,999</b></div></a>
+  <div class="pgrid">
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><span class="pbadge">6% off</span><div class="pimg"><img src="img/shop-tebot-champ.webp" alt="TeBoT Champ Kit" width="480" height="320" loading="lazy" decoding="async" style="object-position:center"></div><div class="pb"><h3>TeBoT Champ Kit</h3><small>Multi-Servo Smart Automation &amp; Robotics Kit</small><div class="price"><b>&#8377;7,499</b><s>&#8377;7,999</s></div></div></a>
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><span class="pbadge">10% off</span><div class="pimg"><img src="img/shop-tebot-advance.webp" alt="TeBoT Advance Kit" width="480" height="320" loading="lazy" decoding="async" style="object-position:center"></div><div class="pb"><h3>TeBoT Advance Kit</h3><small>Ultimate 50+ Projects Robotics &amp; Sensor Kit</small><div class="price"><b>&#8377;8,999</b><s>&#8377;9,999</s></div></div></a>
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><span class="pbadge">7% off</span><div class="pimg"><img src="img/shop-tebot-basic.webp" alt="TeBoT Basic Kit" width="480" height="320" loading="lazy" decoding="async" style="object-position:center"></div><div class="pb"><h3>TeBoT Basic Kit</h3><small>Essential Bluetooth Servo Robotic Arm Kit</small><div class="price"><b>&#8377;6,499</b><s>&#8377;6,999</s></div></div></a>
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div class="pimg"><img src="img/shop-techbot-arduino.webp" alt="TechBoT Arduino Kit" width="480" height="720" loading="lazy" decoding="async" style="object-position:center 35%"></div><div class="pb"><h3>TechBoT Arduino Kit</h3><small>Robotics &amp; sensor kit built on Arduino</small><div class="price"><b>&#8377;3,099</b></div></div></a>
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div class="pimg"><img src="img/shop-otto-spider.webp" alt="Otto Spider Kit" width="480" height="320" loading="lazy" decoding="async" style="object-position:center"></div><div class="pb"><h3>Otto Spider Kit</h3><small>Build and program your own walking robot</small><div class="price"><b>&#8377;4,199</b></div></div></a>
+    <a class="pcard rv" href="https://www.techyguide.in/shop" target="_blank" rel="noopener"><div class="pimg"><img src="img/shop-robotic-arm.webp" alt="Robotic Arm Kit" width="480" height="320" loading="lazy" decoding="async" style="object-position:center"></div><div class="pb"><h3>Robotic Arm Kit</h3><small>Hands-on robotic arm for budding engineers</small><div class="price"><b>&#8377;4,900</b></div></div></a>
   </div>
   <div class="ctarow rv"><a class="btn pri" href="https://www.techyguide.in/shop" target="_blank" rel="noopener">Shop all products</a></div>
 </div></section>
@@ -503,7 +536,7 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 
 <section class="sec gsec" id="play"><div class="wrap">
   <div class="rv"><span class="tg2">Play now</span>
-    <h2>Run through the right door!</h2>
+    <h2>Educational Games in LMS</h2>
     <p>Math Run is a quick taste of the games inside our LMS. Techy runs by itself until you jump in &ndash; tap the game to start!</p>
     <ul><li><b>1</b>Switch lanes (arrow keys, swipe, or tap left / middle / right)</li><li><b>2</b>Run into the door with the correct answer</li><li><b>3</b>A wrong door costs a heart &ndash; build streaks, every level gets faster</li></ul></div>
   <div class="gcol rv">
