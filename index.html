@@ -356,6 +356,45 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1901123867507726');
+fbq('track', 'PageView');
+
+/* Demo Class lead: runs when the form confirms a saved booking.
+   Laptop = Yes -> Lead (content_name "Demo Class"); Laptop = No -> DemoBookedNoLaptop.
+   Also stops the page's own plain fbq('track','Lead') so each booking counts once. */
+window.addEventListener('techy', function (e) {
+  if (!e.detail || e.detail.type !== 'booked' || typeof window.fbq !== 'function') return;
+  var v = function (s) { var el = document.querySelector(s); return el ? el.value : ''; };
+  var laptop = v('input[name=lap]:checked') === 'yes';
+  var params = {
+    content_name: 'Demo Class',
+    content_category: v('#course'),
+    grade: v('#grade'),
+    has_laptop: laptop ? 'yes' : 'no',
+    preferred_slot: v('#slot')
+  };
+  var eventID = 'demo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+  var realFbq = window.fbq;
+  if (laptop) realFbq('track', 'Lead', params, { eventID: eventID });
+  else realFbq('trackCustom', 'DemoBookedNoLaptop', params, { eventID: eventID });
+  window.fbq = function () {};
+  setTimeout(function () { window.fbq = realFbq; }, 0);
+});
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1901123867507726&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <header>
@@ -420,12 +459,12 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
           <div class="f" id="f-phone"><span class="lab">Mobile number</span>
             <div class="ph"><select id="cc" aria-label="Country code"><option value="+91">+91</option><option value="+1">+1</option><option value="+44">+44</option><option value="+971">+971</option><option value="+65">+65</option><option value="+61">+61</option></select>
             <input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Enter mobile number" maxlength="14"></div>
-            <small>Please share the number you use for WhatsApp</small><span class="em">Enter a valid mobile number</span></div>
+            <span class="em">Enter a valid mobile number</span></div>
           <div class="f" id="f-email"><label for="email">Parent's email</label><input id="email" type="email" autocomplete="email" placeholder="Enter email ID"><span class="em">Enter a valid email</span></div>
           <button class="cta" type="button" data-next>Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
         <div class="step" data-s="2">
-          <div class="f" id="f-child"><label for="child">Child's name</label><input id="child" type="text" autocomplete="off" placeholder="Enter child's name" maxlength="80"><small>This will be used on your child's certificate</small><span class="em">Enter the child's name</span></div>
+          <div class="f" id="f-child"><label for="child">Child's name</label><input id="child" type="text" autocomplete="off" placeholder="Enter child's name" maxlength="80"><span class="em">Enter the child's name</span></div>
           <div class="f" id="f-grade"><label for="grade">Child's grade</label><select id="grade"><option value="">Select grade</option></select><span class="em">Select a grade</span></div>
           <div class="f"><span class="lab">Do you have a laptop or desktop?</span><div class="seg"><label><input type="radio" name="lap" value="yes" checked><span>Yes</span></label><label><input type="radio" name="lap" value="no"><span>No</span></label></div>
             <div class="warn" id="lapwarn">A laptop or desktop is needed for live classes – we'll help with options when we call.</div></div>
@@ -444,7 +483,6 @@ footer nav{display:flex;gap:24px}footer a:hover{color:#fff}
           <button class="back" type="button" data-back>← Back</button>
         </div>
         <div class="fmsg" id="fmsg" role="alert"></div>
-        <p class="note">All fields are required. Your details are only used to arrange your trial class.</p>
       </form>
       <div class="ok"><div class="tick"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#1b1840" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><h3>You're booked in, <span id="okname"></span>!</h3><p>Our team will contact you on WhatsApp / phone shortly to confirm the class time.</p><a class="btn yel" href="#play">Play Math Jet while you wait</a></div>
     </div>
@@ -609,7 +647,7 @@ $$('[data-focus]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>{con
 const say=$('#say'),saytxt=$('#saytxt');let sayT;
 const talk=t=>{if(saytxt.textContent===t)return;clearTimeout(sayT);say.classList.add('sw');sayT=setTimeout(()=>{saytxt.textContent=t;say.classList.remove('sw');},220);tell('talk');};
 const tips={phone:"Share the number you use on WhatsApp – we'll confirm your slot there.",cc:"Pick your country code first.",email:"We'll send the class details to this email.",
-  child:"Your child's name goes on their certificate!",grade:"This helps us pick the right level.",lap:"Live classes run on a laptop or desktop.",
+  grade:"This helps us pick the right level.",lap:"Live classes run on a laptop or desktop.",
   course:"Pick what sounds most fun. You can change it later!",coursebtn:"Pick what sounds most fun. You can change it later!",slot:"When is your child usually free?",consent:"Last tick and you're in!"};
 $('#lead').addEventListener('focusin',e=>{const k=e.target.id||e.target.name;if(tips[k])talk(tips[k]);tell('focus',{on:true});});
 $('#lead').addEventListener('focusout',()=>setTimeout(()=>{if(!$('#lead').contains(document.activeElement))tell('focus',{on:false});},50));
